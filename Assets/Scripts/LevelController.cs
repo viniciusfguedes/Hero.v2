@@ -13,7 +13,7 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
-        this.CountdownTimer -= Time.deltaTime;
+        //this.CountdownTimer -= Time.deltaTime;
 
         if (this.CountdownTimer > 0)
         {

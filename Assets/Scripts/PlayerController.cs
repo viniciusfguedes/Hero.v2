@@ -11,17 +11,37 @@ public class PlayerController : MonoBehaviour
     public ArmorType CurrentArmorType;
 
     public GameObject ExplosionCollider;
+    public GameObject ParticleSetArmor;
     public GameObject ParticleCharging;
     public GameObject ParticleExplosion;
 
-    public Material NormalArmorMaterial;
-    public Material NormalHelmetMaterial;
-    public Material ExplosiveArmorMaterial;
-    public Material ExplosiveHelmetMaterial;
+    public Material FlyingArmorMaterial;
+    public Material FlyingHelmetMaterial;
+    public Material LightningArmorMaterial;
+    public Material LightningHelmetMaterial;
+    public Material ShottingArmorMaterial;
+    public Material ShottingHelmetMaterial;
+
+    public GameObject LightningShoot;
+
+    /// <summary>
+    /// Indica se o jogador está no chão
+    /// </summary>
+    public bool isGrounded = true;
 
     #endregion
 
     #region Attributes
+
+    private bool isDying;
+
+    private float shootSpeed = 500f;
+
+    private GameObject shootSpawnPosition;
+
+    private float timestamp;
+
+    private float timeBetweenShots = 0.5f;
 
     /// <summary>
     /// Indica se a explosão foi carregada para disparar o collider com o impacto
@@ -42,31 +62,6 @@ public class PlayerController : MonoBehaviour
     /// Tamanho X do collider do personagem em fly
     /// </summary>
     private float PlayerColliderXFlying = 0.3f;
-
-    /// <summary>
-    /// Tamanho X do collider do personagem em run
-    /// </summary>
-    private float PlayerColliderXRunning = 0.3f;
-
-    /// <summary>
-    /// Controle de tempo para alternar entre walk e run
-    /// </summary>
-    private float walkingTime = 0;
-
-    /// <summary>
-    /// Controle de tempo para alternar entre walk e run
-    /// </summary>
-    private float runningTime = 0;
-
-    /// <summary>
-    /// Indica se o jogador está no chão
-    /// </summary>
-    private bool isGrounded = true;
-
-    /// <summary>
-    /// Indica se o jogador está correndo
-    /// </summary>
-    private bool isRunning = false;
 
     /// <summary>
     /// Indica se o personagem está se movendo horizontalmente
@@ -92,7 +87,7 @@ public class PlayerController : MonoBehaviour
     /// Tempo corrido em que o jetpack está sendo desativado
     /// </summary>
     private float currentDeactivationTimeJetPack = 0f;
-    
+
     /// <summary>
     /// Força aplicada ao ligar o jetpack
     /// </summary>
@@ -101,7 +96,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Velocidade aplicada ao mover o personagem horizontalmente
     /// </summary>
-    private float horizontalVelocity = 1.2f;
+    private float horizontalVelocity = 210f;
 
     /// <summary>
     /// Ponto de divisão da tela para verificar o touch do lado esquerdo ou direito
@@ -140,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 100, 20), teste);
+        GUI.Label(new Rect(10, 10, 100, 20), this.transform.position.ToString());
     }
 
     void Start()
@@ -156,6 +151,8 @@ public class PlayerController : MonoBehaviour
         this.rigidBodyComponent = this.GetComponent<Rigidbody>();
         this.colliderComponente = this.GetComponent<CapsuleCollider>();
 
+        this.shootSpawnPosition = GameObject.Find("ShootSpawnPosition");
+
         this.SetArmor(this.CurrentArmorType);
     }
 
@@ -169,11 +166,12 @@ public class PlayerController : MonoBehaviour
         }
 
         //Touches
-        if (Input.touches.Length > 0)
+        if (Input.touches.Length > 0 && !this.isDying)
         {
-            //if (!EventSystem.current.IsPointerOverGameObject())
-            //{
-                foreach (Touch touch in Input.touches)
+            foreach (Touch touch in Input.touches)
+            {
+                //Botão do HUD
+                if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
                 {
                     #region Touch Began
 
@@ -187,8 +185,10 @@ public class PlayerController : MonoBehaviour
                             this.movementStartTouch = touch.position;
                         else
                         {
-                            if (this.CurrentArmorType == ArmorType.Normal)
+                            if (this.CurrentArmorType == ArmorType.FlyingArmor)
                                 this.ActiveJetPack();
+                            else if (this.CurrentArmorType == ArmorType.ShottingArmor)
+                                this.Shot();
                         }
 
                         //Guarda a posição inicial do touch
@@ -211,11 +211,19 @@ public class PlayerController : MonoBehaviour
                         {
                             #region Lado esquerdo
 
-                            //Somente permite o personagem se mover caso não esteja carregando o poder 
-                            if (this.CurrentArmorType == ArmorType.Normal || (this.CurrentArmorType == ArmorType.Explosive && !this.ParticleCharging.activeInHierarchy && !this.ParticleExplosion.activeInHierarchy))
+                            //Somente permite o personagem se mover caso não esteja carregando a descarga elétrica
+                            if (this.CurrentArmorType == ArmorType.FlyingArmor || this.CurrentArmorType == ArmorType.ShottingArmor || (this.CurrentArmorType == ArmorType.LightningArmor && !this.ParticleCharging.activeInHierarchy && !this.ParticleExplosion.activeInHierarchy))
                             {
-                                //Movimento horizontal
-                                this.rigidBodyComponent.velocity = new Vector2((touch.position.x - this.movementStartTouch.x) * this.horizontalVelocity * Time.deltaTime, this.rigidBodyComponent.velocity.y);
+                                int direction = 0;
+
+                                //Movimento horizontal para a direita
+                                if (touch.position.x > this.movementStartTouch.x)
+                                    direction = 1;
+                                //Movimento horizontal para a esquerda
+                                else
+                                    direction = -1;
+
+                                this.rigidBodyComponent.velocity = new Vector2(direction * this.horizontalVelocity * Time.deltaTime, this.rigidBodyComponent.velocity.y);
 
                                 //Verifica se o personagem está se movendo
                                 if (Mathf.Abs(this.rigidBodyComponent.velocity.x) > 0.05f)
@@ -226,29 +234,7 @@ public class PlayerController : MonoBehaviour
                                     //Vira o personagem para o lado correto
                                     this.transform.localScale = new Vector3(touch.position.x > this.movementStartTouch.x ? 1 : -1, 1, 1);
 
-                                    //Verifica se ele está no chão, caso esteja, executa o 
-                                    //algoritmo para determinar se o personagem deve andar ou correr
-                                    if (this.isGrounded)
-                                    {
-                                        if (Mathf.Abs(this.rigidBodyComponent.velocity.x) > 2.5f)
-                                        {
-                                            this.walkingTime = 0;
-                                            this.runningTime += Time.deltaTime;
-                                        }
-                                        else
-                                        {
-                                            this.runningTime = 0;
-                                            this.walkingTime += Time.deltaTime;
-                                        }
-
-                                        if (this.runningTime > 0.2f)
-                                            this.isRunning = true;
-                                        else if (this.walkingTime > 0.2f)
-                                            this.isRunning = false;
-
-                                        this.animatorComponent.SetBool("IsRunning", this.isRunning);
-                                    }
-                                    else
+                                    if (!this.isGrounded)
                                     {
                                         this.animatorComponent.SetBool("IsOnHorizontalMovement", true);
                                         this.SetPlayerCollider(PlayerColliderType.Flying);
@@ -256,12 +242,7 @@ public class PlayerController : MonoBehaviour
                                 }
                                 else
                                 {
-                                    this.walkingTime = 0;
-                                    this.runningTime = 0;
-
-                                    this.isRunning = false;
                                     this.horizontalMoving = false;
-                                    this.animatorComponent.SetBool("IsRunning", false);
                                     this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
 
                                     if (!this.isGrounded)
@@ -270,13 +251,7 @@ public class PlayerController : MonoBehaviour
                             }
                             else
                             {
-                                this.walkingTime = 0;
-                                this.runningTime = 0;
-
-                                this.isRunning = false;
                                 this.horizontalMoving = false;
-
-                                this.animatorComponent.SetBool("IsRunning", false);
                                 this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
 
                                 if (!this.isGrounded)
@@ -290,34 +265,47 @@ public class PlayerController : MonoBehaviour
                             #region Lado direito
 
                             //Ativa ou mantém o jetpack ativo
-                            if (this.CurrentArmorType == ArmorType.Normal)
+                            if (this.CurrentArmorType == ArmorType.FlyingArmor)
                             {
                                 this.ActiveJetPack();
                                 this.currentChargeTime = 0;
                                 this.ParticleCharging.SetActive(false);
                             }
+                            else if(this.CurrentArmorType == ArmorType.LightningArmor)
+                            {
+                                //Somente ativa o lightning caso o jogador esteja no chão e parado
+                                if (this.isGrounded && !this.horizontalMoving)
+                                {
+                                    this.currentChargeTime += Time.deltaTime;
+                                    this.ParticleCharging.SetActive(true);
+
+                                    if (this.currentChargeTime >= 1.5f)
+                                    {
+                                        //Limpa o contador de tempo
+                                        this.currentChargeTime = 0;
+
+                                        //Desativa as particulas de carregamento
+                                        this.ParticleCharging.SetActive(false);
+
+                                        //Desativa as particulas de explosão
+                                        this.ParticleExplosion.SetActive(false);
+
+                                        //Ativa as particulas de explosão
+                                        this.ParticleExplosion.SetActive(true);
+
+                                        //Ativa o collider da explosão
+                                        this.isExplosionCharged = true;
+                                    }
+                                }
+                                else
+                                {
+                                    this.currentChargeTime = 0;
+                                    this.ParticleCharging.SetActive(false);
+                                }
+                            }
                             else
                             {
-                                this.currentChargeTime += Time.deltaTime;
-                                this.ParticleCharging.SetActive(true);
-
-                                if (this.currentChargeTime >= 2.0f)
-                                {
-                                    //Limpa o contador de tempo
-                                    this.currentChargeTime = 0;
-
-                                    //Desativa as particulas de carregamento
-                                    this.ParticleCharging.SetActive(false);
-
-                                    //Desativa as particulas de explosão
-                                    this.ParticleExplosion.SetActive(false);
-
-                                    //Ativa as particulas de explosão
-                                    this.ParticleExplosion.SetActive(true);
-
-                                    //Ativa o collider da explosão
-                                    this.isExplosionCharged = true;
-                                }
+                                this.Shot();
                             }
 
                             #endregion
@@ -352,12 +340,12 @@ public class PlayerController : MonoBehaviour
                         {
                             #region Lado direito
 
-                            if (this.CurrentArmorType == ArmorType.Normal)
+                            if (this.CurrentArmorType == ArmorType.FlyingArmor)
                             {
                                 //Mantém o personagem flutuando por um tempo antes de mandá-lo de volta para o chão
                                 this.StartDeactiveJetPack();
                             }
-                            else
+                            else if(this.CurrentArmorType == ArmorType.LightningArmor)
                             {
                                 //Limpa o contador de tempo
                                 this.currentChargeTime = 0;
@@ -377,7 +365,14 @@ public class PlayerController : MonoBehaviour
 
                     #endregion
                 }
-            //}
+                else
+                {
+                    this.horizontalMoving = false;
+                    this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
+                    this.rigidBodyComponent.velocity = new Vector3(0, 0);
+                }
+            }
+
         }
         else
         {
@@ -407,9 +402,9 @@ public class PlayerController : MonoBehaviour
 
         #endregion
 
-        #region Explosion
+        #region Lightining
 
-        if(this.isExplosionCharged)
+        if (this.isExplosionCharged)
         {
             this.isExplosionCharged = false;
             this.ExplosionCollider.SetActive(true);
@@ -440,23 +435,11 @@ public class PlayerController : MonoBehaviour
                 this.animatorComponent.SetBool("IsGrounded", true);
 
                 if (this.horizontalMoving)
-                {
-                    if (this.isRunning)
-                    {
-                        //TODO: Running
-                        this.SetPlayerCollider(PlayerColliderType.Running);
-                    }
-                    else
-                    {
-                        this.animatorComponent.SetBool("IsOnHorizontalMovement", true);
-                        this.SetPlayerCollider(PlayerColliderType.Normal);
-                    }
-                }
+                    this.animatorComponent.SetBool("IsOnHorizontalMovement", true);
                 else
-                {
                     this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
-                    this.SetPlayerCollider(PlayerColliderType.Normal);
-                }
+
+                this.SetPlayerCollider(PlayerColliderType.Normal);
             }
         }
         else
@@ -480,8 +463,41 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "SpaceMan")
-            GameObject.Find("Level").GetComponent<LevelController>().PlayerWon = true;
+        switch (other.tag)
+        {
+            case "SensorArea":
+                GameObject[] repteis = GameObject.FindGameObjectsWithTag("Reptil");
+
+                foreach (GameObject reptil in repteis)
+                    if (reptil.GetComponent<ReptilController>() != null)
+                        reptil.GetComponent<ReptilController>().PlayerSensorArea = other;
+                break;
+            case "SpaceMan":
+                GameObject.Find("Level").GetComponent<LevelController>().PlayerWon = true;
+                break;
+            case "Lava":
+                this.StartDie();
+                break;
+            default:
+                break;
+        }            
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "SensorArea":
+                GameObject[] repteis = GameObject.FindGameObjectsWithTag("Reptil");
+
+                foreach (GameObject reptil in repteis)
+                    if (reptil.GetComponent<ReptilController>() != null)
+                        reptil.GetComponent<ReptilController>().PlayerSensorArea = null;
+                break;
+
+            default:
+                break;
+        }
     }
 
     #region Jetpack control
@@ -490,7 +506,7 @@ public class PlayerController : MonoBehaviour
     {
         this.animatorComponent.SetBool("IsGrounded", false);
         this.animatorComponent.SetBool("IsOnHorizontalMovement", this.horizontalMoving);
-        
+
         this.isGrounded = false;
 
         if (this.horizontalMoving)
@@ -529,16 +545,17 @@ public class PlayerController : MonoBehaviour
     private void SetArmor(ArmorType armorType)
     {
         this.CurrentArmorType = armorType;
-
         Renderer[] renderes = GetComponentsInChildren<Renderer>();
-        this.animatorComponent.SetBool("NormalArmor", armorType == ArmorType.Normal);
+
+        this.ParticleSetArmor.SetActive(false);
+        this.ParticleSetArmor.SetActive(true);
 
         foreach (Renderer renderer in renderes)
         {
             if (renderer.gameObject.name.ToLower().StartsWith("space_helmet"))
-                renderer.material = armorType == ArmorType.Normal ? this.NormalHelmetMaterial : this.ExplosiveHelmetMaterial;
-            else if(renderer.gameObject.name.ToLower().Contains("space"))
-                renderer.material = armorType == ArmorType.Normal ? this.NormalArmorMaterial : this.ExplosiveArmorMaterial;
+                renderer.material = armorType == ArmorType.FlyingArmor ? this.FlyingHelmetMaterial : armorType == ArmorType.LightningArmor ? this.LightningHelmetMaterial : this.ShottingHelmetMaterial;
+            else if (renderer.gameObject.name.ToLower().Contains("space"))
+                renderer.material = armorType == ArmorType.FlyingArmor ? this.FlyingArmorMaterial : armorType == ArmorType.LightningArmor ? this.LightningArmorMaterial : this.ShottingArmorMaterial;
         }
     }
 
@@ -548,9 +565,6 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerColliderType.Normal:
                 this.colliderComponente.center = new Vector3(this.PlayerColliderX, 0.95f, 0f);
-                break;
-            case PlayerColliderType.Running:
-                this.colliderComponente.center = new Vector3(this.PlayerColliderXRunning, 0.95f, 0f);
                 break;
             case PlayerColliderType.Flying:
                 this.colliderComponente.center = new Vector3(this.PlayerColliderXFlying, 0.95f, 0f);
@@ -562,12 +576,56 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    public void ChangeArmor()
+    void Shot()
     {
-        if (this.CurrentArmorType == ArmorType.Normal)
-            this.SetArmor(ArmorType.Explosive);
-        else
-            this.SetArmor(ArmorType.Normal);
+        if (Time.time >= this.timestamp)
+        {
+            this.timestamp = Time.time + this.timeBetweenShots;
+            this.animatorComponent.SetTrigger("IsShotting");
+
+            GameObject projectile = Instantiate(this.LightningShoot, this.shootSpawnPosition.transform.position, Quaternion.identity) as GameObject;
+
+            if (this.transform.localScale.x < 0)
+                projectile.GetComponent<Rigidbody>().AddForce(new Vector3(-1 * this.shootSpeed, 0, 0));
+            else
+                projectile.GetComponent<Rigidbody>().AddForce(new Vector3(1 * this.shootSpeed, 0, 0));
+        }
+    }
+
+    void FinishedDie()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void SetColliderDeath()
+    {
+        colliderComponente.direction = 0;
+    }
+
+    public void StartDie()
+    {
+        this.isDying = true;
+        this.rigidBodyComponent.useGravity = true;
+        this.rigidBodyComponent.velocity = Vector3.zero;
+        this.animatorComponent.SetTrigger("IsDying");
+    }
+
+    public void SetFlyingArmor()
+    {
+        if (this.isGrounded)
+            this.SetArmor(ArmorType.FlyingArmor);
+    }
+
+    public void SetLightningArmor()
+    {
+        if (this.isGrounded)
+            this.SetArmor(ArmorType.LightningArmor);
+    }
+
+    public void SetWeaponArmor()
+    {
+        if (this.isGrounded)
+            this.SetArmor(ArmorType.ShottingArmor);
     }
 }
 
@@ -575,8 +633,9 @@ public class PlayerController : MonoBehaviour
 
 public enum ArmorType
 {
-    Normal,
-    Explosive
+    FlyingArmor,
+    LightningArmor,
+    ShottingArmor
 }
 
 public enum TouchSide
@@ -588,7 +647,6 @@ public enum TouchSide
 public enum PlayerColliderType
 {
     Normal,
-    Running,
     Flying
 }
 
