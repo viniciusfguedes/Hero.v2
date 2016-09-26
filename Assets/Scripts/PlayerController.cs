@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,13 @@ public class PlayerController : MonoBehaviour
 
     public GameObject LightningShoot;
 
+    public Image LeftArrowImage;
+    public Image RightArrowImage;
+
+    public GameObject AnalogJoystick;
+    public Button WeaponButton;
+    public Button LightningButton;
+
     /// <summary>
     /// Indica se o jogador está no chão
     /// </summary>
@@ -33,6 +41,17 @@ public class PlayerController : MonoBehaviour
 
     #region Attributes
 
+    private Sprite leftArrowSprite;
+    private Sprite leftArrowActiveSprite;
+    private Sprite rightArrowSprite;
+    private Sprite rightArrowActiveSprite;
+
+    private int lightningCount;
+
+    private int diamondCount;
+
+    private bool hasGunPower;
+    
     private bool isDying;
 
     private float shootSpeed = 500f;
@@ -153,6 +172,11 @@ public class PlayerController : MonoBehaviour
 
         this.shootSpawnPosition = GameObject.Find("ShootSpawnPosition");
 
+        this.leftArrowSprite = Resources.Load<Sprite>("left-arrow");
+        this.leftArrowActiveSprite = Resources.Load<Sprite>("left-arrow-active");
+        this.rightArrowSprite = Resources.Load<Sprite>("right-arrow");
+        this.rightArrowActiveSprite = Resources.Load<Sprite>("right-arrow-active");
+
         this.SetArmor(this.CurrentArmorType);
     }
 
@@ -228,11 +252,29 @@ public class PlayerController : MonoBehaviour
                                 //Verifica se o personagem está se movendo
                                 if (Mathf.Abs(this.rigidBodyComponent.velocity.x) > 0.05f)
                                 {
+                                    //Vira o personagem para o lado correto
+                                    this.transform.localScale = new Vector3(direction, 1, 1);
+
+                                    //if (!this.AnalogJoystick.activeInHierarchy)
+                                    //    this.AnalogJoystick.SetActive(true);
+
+                                    //this.AnalogJoystick.transform.position = this.movementStartTouch;
+
                                     this.horizontalMoving = true;
                                     this.animatorComponent.SetBool("IsOnHorizontalMovement", true);
 
-                                    //Vira o personagem para o lado correto
-                                    this.transform.localScale = new Vector3(touch.position.x > this.movementStartTouch.x ? 1 : -1, 1, 1);
+                                    //Direita
+                                    if(touch.position.x > this.movementStartTouch.x)
+                                    {
+                                        this.LeftArrowImage.sprite = this.leftArrowSprite;
+                                        this.RightArrowImage.sprite = this.rightArrowActiveSprite;
+                                    }
+                                    //Esquerda
+                                    else
+                                    {
+                                        this.LeftArrowImage.sprite = this.leftArrowActiveSprite;
+                                        this.RightArrowImage.sprite = this.rightArrowSprite;
+                                    }
 
                                     if (!this.isGrounded)
                                     {
@@ -243,6 +285,7 @@ public class PlayerController : MonoBehaviour
                                 else
                                 {
                                     this.horizontalMoving = false;
+                                    this.AnalogJoystick.SetActive(false);
                                     this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
 
                                     if (!this.isGrounded)
@@ -252,6 +295,7 @@ public class PlayerController : MonoBehaviour
                             else
                             {
                                 this.horizontalMoving = false;
+                                this.AnalogJoystick.SetActive(false);
                                 this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
 
                                 if (!this.isGrounded)
@@ -274,7 +318,7 @@ public class PlayerController : MonoBehaviour
                             else if(this.CurrentArmorType == ArmorType.LightningArmor)
                             {
                                 //Somente ativa o lightning caso o jogador esteja no chão e parado
-                                if (this.isGrounded && !this.horizontalMoving)
+                                if (this.isGrounded && !this.horizontalMoving && this.lightningCount > 0)
                                 {
                                     this.currentChargeTime += Time.deltaTime;
                                     this.ParticleCharging.SetActive(true);
@@ -332,6 +376,7 @@ public class PlayerController : MonoBehaviour
                                 this.SetPlayerCollider(PlayerColliderType.Normal);
 
                             this.horizontalMoving = false;
+                            this.AnalogJoystick.SetActive(false);
                             this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
 
                             #endregion
@@ -368,6 +413,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     this.horizontalMoving = false;
+                    this.AnalogJoystick.SetActive(false);
                     this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
                     this.rigidBodyComponent.velocity = new Vector3(0, 0);
                 }
@@ -377,6 +423,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             this.horizontalMoving = false;
+            this.AnalogJoystick.SetActive(false);
             this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
 
             this.movementStartTouch = Vector2.zero;
@@ -384,6 +431,8 @@ public class PlayerController : MonoBehaviour
 
             this.touches = new List<TouchData>();
         }
+
+        GameObject.Find("DiamondCount").GetComponent<Text>().text = diamondCount.ToString() + "/5";
     }
 
     void FixedUpdate()
@@ -406,9 +455,17 @@ public class PlayerController : MonoBehaviour
 
         if (this.isExplosionCharged)
         {
+            this.lightningCount -= 1;
             this.isExplosionCharged = false;
             this.ExplosionCollider.SetActive(true);
             this.ExplosionCollider.transform.localScale = new Vector3(7f, 0.1f, 7f);
+
+            if(this.lightningCount <= 0)
+            {
+                this.SetArmor(ArmorType.FlyingArmor);
+                Sprite lightningSprite = Resources.Load<Sprite>("lightning-icon-disabled");
+                ((Image)LightningButton.GetComponent<Image>()).sprite = lightningSprite;
+            }
         }
         else
         {
@@ -477,6 +534,27 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Lava":
                 this.StartDie();
+                break;
+            case "LightningPower":
+
+                this.lightningCount += 2;
+                Sprite lightningSprite = Resources.Load<Sprite>("lightning-icon");
+                ((Image)LightningButton.GetComponent<Image>()).sprite = lightningSprite;
+
+                Destroy(other.gameObject);
+                break;
+            case "GunPower":
+
+                this.hasGunPower = true;
+                Sprite gunSprite = Resources.Load<Sprite>("gun-icon");
+                ((Image)WeaponButton.GetComponent<Image>()).sprite = gunSprite;
+                
+                Destroy(other.gameObject);
+                break;
+
+            case "Diamond":
+                this.diamondCount += 1;
+                Destroy(other.gameObject);
                 break;
             default:
                 break;
@@ -618,13 +696,13 @@ public class PlayerController : MonoBehaviour
 
     public void SetLightningArmor()
     {
-        if (this.isGrounded)
+        if (this.isGrounded && this.lightningCount > 0)
             this.SetArmor(ArmorType.LightningArmor);
     }
 
     public void SetWeaponArmor()
     {
-        if (this.isGrounded)
+        if (this.isGrounded && this.hasGunPower)
             this.SetArmor(ArmorType.ShottingArmor);
     }
 }

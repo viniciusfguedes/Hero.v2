@@ -25,9 +25,9 @@ public class ProjectileScript : MonoBehaviour
             Destroy(this.gameObject);
     }
 
-	void OnCollisionEnter (Collision hit) {
-
-        if (!hit.gameObject.CompareTag("Player"))
+    void OnTriggerEnter(Collider hit)
+    {
+        if (!hit.gameObject.CompareTag("Player") && !hit.gameObject.CompareTag("SensorArea"))
         {
             impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
 

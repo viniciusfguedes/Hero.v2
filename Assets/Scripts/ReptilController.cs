@@ -176,9 +176,9 @@ public class ReptilController : MonoBehaviour
     {
         CapsuleCollider collider = this.GetComponent<CapsuleCollider>();
 
-        collider.center = new Vector3(-0.1f, 0.15f, 0);
-        collider.radius = 0.28f;
-        collider.height = 1.45f;
+        collider.center = new Vector3(0, 0, 0);
+        collider.radius = 0.05f;
+        collider.height = 0.25f;
         collider.direction = 0;
 
         this.animatorComponent.SetTrigger("Die");
