@@ -92,6 +92,5 @@ ExportedObj/
 sysinfo.txt
 
 # Builds
-*.apk
 *.unitypackage
 >>>>>>> 58690a292f44d49d53e94050b763573b4acfefca
