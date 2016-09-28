@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public Image RightArrowImage;
 
     public GameObject AnalogJoystick;
+    public Button FlyingButton;
     public Button WeaponButton;
     public Button LightningButton;
 
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
     private int diamondCount;
 
     private bool hasGunPower;
-    
+
     private bool isDying;
 
     private float shootSpeed = 500f;
@@ -194,102 +195,89 @@ public class PlayerController : MonoBehaviour
         {
             foreach (Touch touch in Input.touches)
             {
-                //Botão do HUD
-                if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                #region Touch Began
+
+                if (touch.phase == TouchPhase.Began)
                 {
-                    #region Touch Began
+                    //Identifica o lado que o touch iniciou
+                    TouchSide touchSide = touch.position.x < midScreen ? TouchSide.Left : TouchSide.Right;
 
-                    if (touch.phase == TouchPhase.Began)
+                    //Define o ponto central de controle da movimentação horizontal
+                    if (touchSide == TouchSide.Left)
+                        this.movementStartTouch = touch.position;
+                    else if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
                     {
-                        //Identifica o lado que o touch iniciou
-                        TouchSide touchSide = touch.position.x < midScreen ? TouchSide.Left : TouchSide.Right;
-
-                        //Define o ponto central de controle da movimentação horizontal
-                        if (touchSide == TouchSide.Left)
-                            this.movementStartTouch = touch.position;
-                        else
-                        {
-                            if (this.CurrentArmorType == ArmorType.FlyingArmor)
-                                this.ActiveJetPack();
-                            else if (this.CurrentArmorType == ArmorType.ShottingArmor)
-                                this.Shot();
-                        }
-
-                        //Guarda a posição inicial do touch
-                        this.touches.Add(new TouchData(touch.fingerId, touch.position, Time.time, touchSide));
+                        if (this.CurrentArmorType == ArmorType.FlyingArmor)
+                            this.ActiveJetPack();
+                        else if (this.CurrentArmorType == ArmorType.ShottingArmor)
+                            this.Shot();
                     }
 
-                    #endregion
+                    //Guarda a posição inicial do touch
+                    this.touches.Add(new TouchData(touch.fingerId, touch.position, Time.time, touchSide));
+                }
 
-                    #region Touch Moved & Stationary
+                #endregion
 
-                    else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                #region Touch Moved & Stationary
+
+                else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                {
+                    int index = this.touches.FindIndex(x => x.TouchId == touch.fingerId);
+
+                    if (index == -1)
+                        continue;
+
+                    //Move o personagem para o lado em que o dedo está se movendo
+                    if (touch.position.x < midScreen && this.touches[index].TouchSide == TouchSide.Left)
                     {
-                        int index = this.touches.FindIndex(x => x.TouchId == touch.fingerId);
+                        #region Lado esquerdo
 
-                        if (index == -1)
-                            continue;
-
-                        //Move o personagem para o lado em que o dedo está se movendo
-                        if (touch.position.x < midScreen && this.touches[index].TouchSide == TouchSide.Left)
+                        //Somente permite o personagem se mover caso não esteja carregando a descarga elétrica
+                        if (this.CurrentArmorType == ArmorType.FlyingArmor || this.CurrentArmorType == ArmorType.ShottingArmor || (this.CurrentArmorType == ArmorType.LightningArmor && !this.ParticleCharging.activeInHierarchy && !this.ParticleExplosion.activeInHierarchy))
                         {
-                            #region Lado esquerdo
+                            int direction = 0;
 
-                            //Somente permite o personagem se mover caso não esteja carregando a descarga elétrica
-                            if (this.CurrentArmorType == ArmorType.FlyingArmor || this.CurrentArmorType == ArmorType.ShottingArmor || (this.CurrentArmorType == ArmorType.LightningArmor && !this.ParticleCharging.activeInHierarchy && !this.ParticleExplosion.activeInHierarchy))
+                            //Movimento horizontal para a direita
+                            if (touch.position.x > this.movementStartTouch.x)
+                                direction = 1;
+                            //Movimento horizontal para a esquerda
+                            else
+                                direction = -1;
+
+                            this.rigidBodyComponent.velocity = new Vector2(direction * this.horizontalVelocity * Time.deltaTime, this.rigidBodyComponent.velocity.y);
+
+                            //Verifica se o personagem está se movendo
+                            if (Mathf.Abs(this.rigidBodyComponent.velocity.x) > 0.05f)
                             {
-                                int direction = 0;
+                                //Vira o personagem para o lado correto
+                                this.transform.localScale = new Vector3(direction, 1, 1);
 
-                                //Movimento horizontal para a direita
+                                if (!this.AnalogJoystick.activeInHierarchy)
+                                    this.AnalogJoystick.SetActive(true);
+
+                                this.AnalogJoystick.transform.position = this.movementStartTouch;
+
+                                this.horizontalMoving = true;
+                                this.animatorComponent.SetBool("IsOnHorizontalMovement", true);
+
+                                //Direita
                                 if (touch.position.x > this.movementStartTouch.x)
-                                    direction = 1;
-                                //Movimento horizontal para a esquerda
-                                else
-                                    direction = -1;
-
-                                this.rigidBodyComponent.velocity = new Vector2(direction * this.horizontalVelocity * Time.deltaTime, this.rigidBodyComponent.velocity.y);
-
-                                //Verifica se o personagem está se movendo
-                                if (Mathf.Abs(this.rigidBodyComponent.velocity.x) > 0.05f)
                                 {
-                                    //Vira o personagem para o lado correto
-                                    this.transform.localScale = new Vector3(direction, 1, 1);
-
-                                    //if (!this.AnalogJoystick.activeInHierarchy)
-                                    //    this.AnalogJoystick.SetActive(true);
-
-                                    //this.AnalogJoystick.transform.position = this.movementStartTouch;
-
-                                    this.horizontalMoving = true;
-                                    this.animatorComponent.SetBool("IsOnHorizontalMovement", true);
-
-                                    //Direita
-                                    if(touch.position.x > this.movementStartTouch.x)
-                                    {
-                                        this.LeftArrowImage.sprite = this.leftArrowSprite;
-                                        this.RightArrowImage.sprite = this.rightArrowActiveSprite;
-                                    }
-                                    //Esquerda
-                                    else
-                                    {
-                                        this.LeftArrowImage.sprite = this.leftArrowActiveSprite;
-                                        this.RightArrowImage.sprite = this.rightArrowSprite;
-                                    }
-
-                                    if (!this.isGrounded)
-                                    {
-                                        this.animatorComponent.SetBool("IsOnHorizontalMovement", true);
-                                        this.SetPlayerCollider(PlayerColliderType.Flying);
-                                    }
+                                    this.LeftArrowImage.sprite = this.leftArrowSprite;
+                                    this.RightArrowImage.sprite = this.rightArrowActiveSprite;
                                 }
+                                //Esquerda
                                 else
                                 {
-                                    this.horizontalMoving = false;
-                                    this.AnalogJoystick.SetActive(false);
-                                    this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
+                                    this.LeftArrowImage.sprite = this.leftArrowActiveSprite;
+                                    this.RightArrowImage.sprite = this.rightArrowSprite;
+                                }
 
-                                    if (!this.isGrounded)
-                                        this.SetPlayerCollider(PlayerColliderType.Normal);
+                                if (!this.isGrounded)
+                                {
+                                    this.animatorComponent.SetBool("IsOnHorizontalMovement", true);
+                                    this.SetPlayerCollider(PlayerColliderType.Flying);
                                 }
                             }
                             else
@@ -297,135 +285,138 @@ public class PlayerController : MonoBehaviour
                                 this.horizontalMoving = false;
                                 this.AnalogJoystick.SetActive(false);
                                 this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
+                                this.rigidBodyComponent.velocity = new Vector3(0, this.rigidBodyComponent.velocity.y);
 
                                 if (!this.isGrounded)
                                     this.SetPlayerCollider(PlayerColliderType.Normal);
                             }
-
-                            #endregion
                         }
-                        else if (this.touches[index].TouchSide == TouchSide.Right)
+                        else
                         {
-                            #region Lado direito
+                            this.horizontalMoving = false;
+                            this.AnalogJoystick.SetActive(false);
+                            this.rigidBodyComponent.velocity = new Vector3(0, this.rigidBodyComponent.velocity.y);
+                            this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
 
-                            //Ativa ou mantém o jetpack ativo
-                            if (this.CurrentArmorType == ArmorType.FlyingArmor)
+                            if (!this.isGrounded)
+                                this.SetPlayerCollider(PlayerColliderType.Normal);
+                        }
+
+                        #endregion
+                    }
+                    else if (this.touches[index].TouchSide == TouchSide.Right && !EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    {
+                        #region Lado direito
+
+                        //Ativa ou mantém o jetpack ativo
+                        if (this.CurrentArmorType == ArmorType.FlyingArmor)
+                        {
+                            this.ActiveJetPack();
+                            this.currentChargeTime = 0;
+                            this.ParticleCharging.SetActive(false);
+                        }
+                        else if (this.CurrentArmorType == ArmorType.LightningArmor)
+                        {
+                            //Somente ativa o lightning caso o jogador esteja no chão e parado
+                            if (this.isGrounded && !this.horizontalMoving && this.lightningCount > 0)
                             {
-                                this.ActiveJetPack();
-                                this.currentChargeTime = 0;
-                                this.ParticleCharging.SetActive(false);
-                            }
-                            else if(this.CurrentArmorType == ArmorType.LightningArmor)
-                            {
-                                //Somente ativa o lightning caso o jogador esteja no chão e parado
-                                if (this.isGrounded && !this.horizontalMoving && this.lightningCount > 0)
+                                this.currentChargeTime += Time.deltaTime;
+                                this.ParticleCharging.SetActive(true);
+
+                                if (this.currentChargeTime >= 1.5f)
                                 {
-                                    this.currentChargeTime += Time.deltaTime;
-                                    this.ParticleCharging.SetActive(true);
-
-                                    if (this.currentChargeTime >= 1.5f)
-                                    {
-                                        //Limpa o contador de tempo
-                                        this.currentChargeTime = 0;
-
-                                        //Desativa as particulas de carregamento
-                                        this.ParticleCharging.SetActive(false);
-
-                                        //Desativa as particulas de explosão
-                                        this.ParticleExplosion.SetActive(false);
-
-                                        //Ativa as particulas de explosão
-                                        this.ParticleExplosion.SetActive(true);
-
-                                        //Ativa o collider da explosão
-                                        this.isExplosionCharged = true;
-                                    }
-                                }
-                                else
-                                {
+                                    //Limpa o contador de tempo
                                     this.currentChargeTime = 0;
+
+                                    //Desativa as particulas de carregamento
                                     this.ParticleCharging.SetActive(false);
+
+                                    //Desativa as particulas de explosão
+                                    this.ParticleExplosion.SetActive(false);
+
+                                    //Ativa as particulas de explosão
+                                    this.ParticleExplosion.SetActive(true);
+
+                                    //Ativa o collider da explosão
+                                    this.isExplosionCharged = true;
                                 }
                             }
                             else
                             {
-                                this.Shot();
-                            }
-
-                            #endregion
-                        }
-                    }
-
-                    #endregion
-
-                    #region Touch Ended
-
-                    else if (touch.phase == TouchPhase.Ended)
-                    {
-                        int index = this.touches.FindIndex(x => x.TouchId == touch.fingerId);
-
-                        if (index == -1)
-                            continue;
-
-                        //Mantém o personagem parado horizontalmente
-                        if (touch.position.x < midScreen && this.touches[index].TouchSide == TouchSide.Left)
-                        {
-                            #region Lado esquerdo
-
-                            if (!this.isGrounded)
-                                this.SetPlayerCollider(PlayerColliderType.Normal);
-
-                            this.horizontalMoving = false;
-                            this.AnalogJoystick.SetActive(false);
-                            this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
-
-                            #endregion
-                        }
-                        else if (this.touches[index].TouchSide == TouchSide.Right)
-                        {
-                            #region Lado direito
-
-                            if (this.CurrentArmorType == ArmorType.FlyingArmor)
-                            {
-                                //Mantém o personagem flutuando por um tempo antes de mandá-lo de volta para o chão
-                                this.StartDeactiveJetPack();
-                            }
-                            else if(this.CurrentArmorType == ArmorType.LightningArmor)
-                            {
-                                //Limpa o contador de tempo
                                 this.currentChargeTime = 0;
-
-                                //Desativa as particulas de carregamento
                                 this.ParticleCharging.SetActive(false);
-
-                                //Desativa as particulas de explosão
-                                this.ParticleExplosion.SetActive(false);
                             }
-
-                            #endregion
+                        }
+                        else
+                        {
+                            this.Shot();
                         }
 
-                        this.touches.RemoveAt(index);
+                        #endregion
+                    }
+                }
+
+                #endregion
+
+                #region Touch Ended
+
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    int index = this.touches.FindIndex(x => x.TouchId == touch.fingerId);
+
+                    if (index == -1)
+                        continue;
+
+                    //Mantém o personagem parado horizontalmente
+                    if (touch.position.x < midScreen && this.touches[index].TouchSide == TouchSide.Left)
+                    {
+                        #region Lado esquerdo
+
+                        if (!this.isGrounded)
+                            this.SetPlayerCollider(PlayerColliderType.Normal);
+
+                        this.horizontalMoving = false;
+                        this.AnalogJoystick.SetActive(false);
+                        this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
+                        this.rigidBodyComponent.velocity = new Vector3(0, this.rigidBodyComponent.velocity.y);
+
+                        #endregion
+                    }
+                    else if (this.touches[index].TouchSide == TouchSide.Right && !EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    {
+                        #region Lado direito
+
+                        if (this.CurrentArmorType == ArmorType.FlyingArmor)
+                        {
+                            //Mantém o personagem flutuando por um tempo antes de mandá-lo de volta para o chão
+                            this.StartDeactiveJetPack();
+                        }
+                        else if (this.CurrentArmorType == ArmorType.LightningArmor)
+                        {
+                            //Limpa o contador de tempo
+                            this.currentChargeTime = 0;
+
+                            //Desativa as particulas de carregamento
+                            this.ParticleCharging.SetActive(false);
+
+                            //Desativa as particulas de explosão
+                            this.ParticleExplosion.SetActive(false);
+                        }
+
+                        #endregion
                     }
 
-                    #endregion
+                    this.touches.RemoveAt(index);
                 }
-                else
-                {
-                    this.horizontalMoving = false;
-                    this.AnalogJoystick.SetActive(false);
-                    this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
-                    this.rigidBodyComponent.velocity = new Vector3(0, 0);
-                }
-            }
 
+                #endregion
+            }
         }
         else
         {
             this.horizontalMoving = false;
             this.AnalogJoystick.SetActive(false);
             this.animatorComponent.SetBool("IsOnHorizontalMovement", false);
-
             this.movementStartTouch = Vector2.zero;
             this.rigidBodyComponent.velocity = new Vector3(0, this.rigidBodyComponent.velocity.y);
 
@@ -460,7 +451,7 @@ public class PlayerController : MonoBehaviour
             this.ExplosionCollider.SetActive(true);
             this.ExplosionCollider.transform.localScale = new Vector3(7f, 0.1f, 7f);
 
-            if(this.lightningCount <= 0)
+            if (this.lightningCount <= 0)
             {
                 this.SetArmor(ArmorType.FlyingArmor);
                 Sprite lightningSprite = Resources.Load<Sprite>("lightning-icon-disabled");
@@ -523,11 +514,11 @@ public class PlayerController : MonoBehaviour
         switch (other.tag)
         {
             case "SensorArea":
-                GameObject[] repteis = GameObject.FindGameObjectsWithTag("Reptil");
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemie");
 
-                foreach (GameObject reptil in repteis)
-                    if (reptil.GetComponent<ReptilController>() != null)
-                        reptil.GetComponent<ReptilController>().PlayerSensorArea = other;
+                foreach (GameObject enemie in enemies)
+                    if (enemie.GetComponent<EnemieController>() != null)
+                        enemie.GetComponent<EnemieController>().PlayerSensorArea = other;
                 break;
             case "SpaceMan":
                 GameObject.Find("Level").GetComponent<LevelController>().PlayerWon = true;
@@ -548,7 +539,7 @@ public class PlayerController : MonoBehaviour
                 this.hasGunPower = true;
                 Sprite gunSprite = Resources.Load<Sprite>("gun-icon");
                 ((Image)WeaponButton.GetComponent<Image>()).sprite = gunSprite;
-                
+
                 Destroy(other.gameObject);
                 break;
 
@@ -558,7 +549,7 @@ public class PlayerController : MonoBehaviour
                 break;
             default:
                 break;
-        }            
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -566,11 +557,11 @@ public class PlayerController : MonoBehaviour
         switch (other.tag)
         {
             case "SensorArea":
-                GameObject[] repteis = GameObject.FindGameObjectsWithTag("Reptil");
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemie");
 
-                foreach (GameObject reptil in repteis)
-                    if (reptil.GetComponent<ReptilController>() != null)
-                        reptil.GetComponent<ReptilController>().PlayerSensorArea = null;
+                foreach (GameObject enemie in enemies)
+                    if (enemie.GetComponent<EnemieController>() != null)
+                        enemie.GetComponent<EnemieController>().PlayerSensorArea = null;
                 break;
 
             default:
@@ -624,6 +615,27 @@ public class PlayerController : MonoBehaviour
     {
         this.CurrentArmorType = armorType;
         Renderer[] renderes = GetComponentsInChildren<Renderer>();
+
+        switch (armorType)
+        {
+            case ArmorType.FlyingArmor:
+                this.FlyingButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("flying-icon");
+                this.WeaponButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("gun-icon-disabled");
+                this.LightningButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("lightning-icon-disabled");
+                break;
+            case ArmorType.LightningArmor:
+                this.FlyingButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("flying-icon-disabled");
+                this.WeaponButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("gun-icon-disabled");
+                this.LightningButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("lightning-icon");
+                break;
+            case ArmorType.ShottingArmor:
+                this.FlyingButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("flying-icon-disabled");
+                this.WeaponButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("gun-icon");
+                this.LightningButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("lightning-icon-disabled");
+                break;
+            default:
+                break;
+        }
 
         this.ParticleSetArmor.SetActive(false);
         this.ParticleSetArmor.SetActive(true);

@@ -31,9 +31,9 @@ public class ProjectileScript : MonoBehaviour
         {
             impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
 
-            if (hit.gameObject.tag == "Reptil") 
+            if (hit.gameObject.tag == "Enemie") 
             {
-                hit.gameObject.GetComponent<ReptilController>().Shooted();
+                hit.gameObject.GetComponent<EnemieController>().Shooted();
             }
 
             foreach (GameObject trail in trailParticles)

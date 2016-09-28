@@ -1,0 +1,1813 @@
+fileFormatVersion: 2
+guid: 5be2c6dc7d0cd11418701026bf971b37
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: chest
+    100004: head
+    100006: hips
+    100008: hips_002
+    100010: hips_003
+    100012: hips_004
+    100014: hips_005
+    100016: hips_006
+    100018: hips_007
+    100020: hips_008
+    100022: hips_009
+    100024: hips_010
+    100026: hips_011
+    100028: hips_012
+    100030: hips_013
+    100032: hips_014
+    100034: hips_015
+    100036: hips_016
+    100038: hips_017
+    100040: hips_018
+    100042: hips_019
+    100044: hips_020
+    100046: hips_021
+    100048: metarig
+    100050: neck
+    100052: shin_L
+    100054: shin_L_001
+    100056: shin_L_002
+    100058: shin_L_003
+    100060: shin_L_004
+    100062: shin_L_005
+    100064: shin_R
+    100066: shin_R_001
+    100068: shin_R_002
+    100070: shin_R_003
+    100072: shin_R_004
+    100074: shin_R_005
+    100076: shoulder_L
+    100078: shoulder_R
+    100080: spine
+    100082: thigh_L
+    100084: thigh_R
+    100086: upper_arm_L
+    100088: upper_arm_L_001
+    100090: upper_arm_L_002
+    100092: upper_arm_L_003
+    100094: upper_arm_L_004
+    100096: upper_arm_L_005
+    100098: upper_arm_R
+    100100: upper_arm_R_001
+    100102: upper_arm_R_002
+    100104: upper_arm_R_003
+    100106: upper_arm_R_004
+    100108: upper_arm_R_005
+    100110: Insect
+    400000: //RootNode
+    400002: chest
+    400004: head
+    400006: hips
+    400008: hips_002
+    400010: hips_003
+    400012: hips_004
+    400014: hips_005
+    400016: hips_006
+    400018: hips_007
+    400020: hips_008
+    400022: hips_009
+    400024: hips_010
+    400026: hips_011
+    400028: hips_012
+    400030: hips_013
+    400032: hips_014
+    400034: hips_015
+    400036: hips_016
+    400038: hips_017
+    400040: hips_018
+    400042: hips_019
+    400044: hips_020
+    400046: hips_021
+    400048: metarig
+    400050: neck
+    400052: shin_L
+    400054: shin_L_001
+    400056: shin_L_002
+    400058: shin_L_003
+    400060: shin_L_004
+    400062: shin_L_005
+    400064: shin_R
+    400066: shin_R_001
+    400068: shin_R_002
+    400070: shin_R_003
+    400072: shin_R_004
+    400074: shin_R_005
+    400076: shoulder_L
+    400078: shoulder_R
+    400080: spine
+    400082: thigh_L
+    400084: thigh_R
+    400086: upper_arm_L
+    400088: upper_arm_L_001
+    400090: upper_arm_L_002
+    400092: upper_arm_L_003
+    400094: upper_arm_L_004
+    400096: upper_arm_L_005
+    400098: upper_arm_R
+    400100: upper_arm_R_001
+    400102: upper_arm_R_002
+    400104: upper_arm_R_003
+    400106: upper_arm_R_004
+    400108: upper_arm_R_005
+    400110: Insect
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Insect
+    7400000: Idle
+    7400002: Attack_Right
+    7400004: Walk
+    7400006: Dead
+    7400008: Walk_Atttack
+    7400010: Walk_Attack2
+    7400012: Walk_GetHit
+    7400014: GetHit
+    7400016: Walk_Attack
+    9500000: //RootNode
+    13700000: Insect
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Attack_Right' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'hips' is inbetween humanoid transforms and
+      has rotation animation that will be discarded.\n\t'shin_R_001' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Dead' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'hips'
+      has translation animation that will be discarded.\n\t'hips' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'shin_L_001'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'shin_R_001'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'GetHit' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'shin_R_001'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Walk' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'hips'
+      has translation animation that will be discarded.\n\t'shin_L_001' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'shin_R_001'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Walk_Attack' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'hips'
+      has translation animation that will be discarded.\n\t'shin_L_001' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'shin_R_001'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Walk_Attack2' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'hips'
+      has translation animation that will be discarded.\n\t'hips' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'shin_L_001'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'shin_R_001'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Walk_GetHit' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'hips'
+      has translation animation that will be discarded.\n\t'shin_L_001' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'shin_R_001'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: -1
+      lastFrame: 199
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Insect
+        weight: 1
+      - path: metarig
+        weight: 1
+      - path: metarig/hips
+        weight: 1
+      - path: metarig/hips/spine
+        weight: 1
+      - path: metarig/hips/spine/chest
+        weight: 1
+      - path: metarig/hips/spine/chest/neck
+        weight: 1
+      - path: metarig/hips/spine/chest/neck/head
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002/upper_arm_L_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004/upper_arm_L_005
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002/upper_arm_R_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004/upper_arm_R_005
+        weight: 1
+      - path: metarig/hips/thigh_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_002
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_004
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_005
+        weight: 1
+      - path: metarig/hips/thigh_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_002
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_004
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_005
+        weight: 1
+      - path: metarig/hips_002
+        weight: 1
+      - path: metarig/hips_002/hips_003
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020/hips_021
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014/hips_015
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack_Right
+      takeName: Attack_Right
+      firstFrame: -1
+      lastFrame: 78
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.57758623
+        functionName: FinishedAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: b210edf107800c649a4bae39407c2a5a,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Insect
+        weight: 1
+      - path: metarig
+        weight: 1
+      - path: metarig/hips
+        weight: 1
+      - path: metarig/hips/spine
+        weight: 1
+      - path: metarig/hips/spine/chest
+        weight: 1
+      - path: metarig/hips/spine/chest/neck
+        weight: 1
+      - path: metarig/hips/spine/chest/neck/head
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002/upper_arm_L_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004/upper_arm_L_005
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002/upper_arm_R_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004/upper_arm_R_005
+        weight: 1
+      - path: metarig/hips/thigh_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_002
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_004
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_005
+        weight: 1
+      - path: metarig/hips/thigh_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_002
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_004
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_005
+        weight: 1
+      - path: metarig/hips_002
+        weight: 1
+      - path: metarig/hips_002/hips_003
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020/hips_021
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014/hips_015
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Walk
+      firstFrame: -1
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Insect
+        weight: 1
+      - path: metarig
+        weight: 1
+      - path: metarig/hips
+        weight: 1
+      - path: metarig/hips/spine
+        weight: 1
+      - path: metarig/hips/spine/chest
+        weight: 1
+      - path: metarig/hips/spine/chest/neck
+        weight: 1
+      - path: metarig/hips/spine/chest/neck/head
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002/upper_arm_L_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004/upper_arm_L_005
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002/upper_arm_R_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004/upper_arm_R_005
+        weight: 1
+      - path: metarig/hips/thigh_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_002
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_004
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_005
+        weight: 1
+      - path: metarig/hips/thigh_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_002
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_004
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_005
+        weight: 1
+      - path: metarig/hips_002
+        weight: 1
+      - path: metarig/hips_002/hips_003
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020/hips_021
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014/hips_015
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Dead
+      takeName: Dead
+      firstFrame: -1
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.57471263
+        functionName: DieFinished
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: b210edf107800c649a4bae39407c2a5a,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Insect
+        weight: 1
+      - path: metarig
+        weight: 1
+      - path: metarig/hips
+        weight: 1
+      - path: metarig/hips/spine
+        weight: 1
+      - path: metarig/hips/spine/chest
+        weight: 1
+      - path: metarig/hips/spine/chest/neck
+        weight: 1
+      - path: metarig/hips/spine/chest/neck/head
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002/upper_arm_L_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004/upper_arm_L_005
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002/upper_arm_R_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004/upper_arm_R_005
+        weight: 1
+      - path: metarig/hips/thigh_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_002
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_004
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_005
+        weight: 1
+      - path: metarig/hips/thigh_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_002
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_004
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_005
+        weight: 1
+      - path: metarig/hips_002
+        weight: 1
+      - path: metarig/hips_002/hips_003
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020/hips_021
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014/hips_015
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk_Attack
+      takeName: Walk_Attack
+      firstFrame: -1
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Insect
+        weight: 1
+      - path: metarig
+        weight: 1
+      - path: metarig/hips
+        weight: 1
+      - path: metarig/hips/spine
+        weight: 1
+      - path: metarig/hips/spine/chest
+        weight: 1
+      - path: metarig/hips/spine/chest/neck
+        weight: 1
+      - path: metarig/hips/spine/chest/neck/head
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002/upper_arm_L_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004/upper_arm_L_005
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002/upper_arm_R_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004/upper_arm_R_005
+        weight: 1
+      - path: metarig/hips/thigh_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_002
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_004
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_005
+        weight: 1
+      - path: metarig/hips/thigh_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_002
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_004
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_005
+        weight: 1
+      - path: metarig/hips_002
+        weight: 1
+      - path: metarig/hips_002/hips_003
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020/hips_021
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014/hips_015
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk_Attack2
+      takeName: Walk_Attack2
+      firstFrame: -1
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Insect
+        weight: 1
+      - path: metarig
+        weight: 1
+      - path: metarig/hips
+        weight: 1
+      - path: metarig/hips/spine
+        weight: 1
+      - path: metarig/hips/spine/chest
+        weight: 1
+      - path: metarig/hips/spine/chest/neck
+        weight: 1
+      - path: metarig/hips/spine/chest/neck/head
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002/upper_arm_L_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004/upper_arm_L_005
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002/upper_arm_R_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004/upper_arm_R_005
+        weight: 1
+      - path: metarig/hips/thigh_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_002
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_004
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_005
+        weight: 1
+      - path: metarig/hips/thigh_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_002
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_004
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_005
+        weight: 1
+      - path: metarig/hips_002
+        weight: 1
+      - path: metarig/hips_002/hips_003
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020/hips_021
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014/hips_015
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk_GetHit
+      takeName: Walk_GetHit
+      firstFrame: -1
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Insect
+        weight: 1
+      - path: metarig
+        weight: 1
+      - path: metarig/hips
+        weight: 1
+      - path: metarig/hips/spine
+        weight: 1
+      - path: metarig/hips/spine/chest
+        weight: 1
+      - path: metarig/hips/spine/chest/neck
+        weight: 1
+      - path: metarig/hips/spine/chest/neck/head
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002/upper_arm_L_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004/upper_arm_L_005
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002/upper_arm_R_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004/upper_arm_R_005
+        weight: 1
+      - path: metarig/hips/thigh_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_002
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_004
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_005
+        weight: 1
+      - path: metarig/hips/thigh_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_002
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_004
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_005
+        weight: 1
+      - path: metarig/hips_002
+        weight: 1
+      - path: metarig/hips_002/hips_003
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020/hips_021
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014/hips_015
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: GetHit
+      takeName: GetHit
+      firstFrame: -1
+      lastFrame: 36
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Insect
+        weight: 1
+      - path: metarig
+        weight: 1
+      - path: metarig/hips
+        weight: 1
+      - path: metarig/hips/spine
+        weight: 1
+      - path: metarig/hips/spine/chest
+        weight: 1
+      - path: metarig/hips/spine/chest/neck
+        weight: 1
+      - path: metarig/hips/spine/chest/neck/head
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_002/upper_arm_L_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_L/upper_arm_L/upper_arm_L_001/upper_arm_L_004/upper_arm_L_005
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_002/upper_arm_R_003
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004
+        weight: 1
+      - path: metarig/hips/spine/chest/shoulder_R/upper_arm_R/upper_arm_R_001/upper_arm_R_004/upper_arm_R_005
+        weight: 1
+      - path: metarig/hips/thigh_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_002
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_004
+        weight: 1
+      - path: metarig/hips/thigh_L/shin_L/shin_L_001/shin_L_003/shin_L_005
+        weight: 1
+      - path: metarig/hips/thigh_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_002
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_004
+        weight: 1
+      - path: metarig/hips/thigh_R/shin_R/shin_R_001/shin_R_003/shin_R_005
+        weight: 1
+      - path: metarig/hips_002
+        weight: 1
+      - path: metarig/hips_002/hips_003
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_008/hips_016/hips_017/hips_018/hips_019/hips_020/hips_021
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014
+        weight: 1
+      - path: metarig/hips_002/hips_003/hips_004/hips_005/hips_006/hips_007/hips_009/hips_010/hips_011/hips_012/hips_013/hips_014/hips_015
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: metarig
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: thigh_L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: thigh_R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shin_L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shin_R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shin_L_003
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shin_R_003
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: chest
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shoulder_L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shoulder_R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upper_arm_L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upper_arm_R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upper_arm_L_001
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upper_arm_R_001
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upper_arm_L_004
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upper_arm_R_004
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shin_L_005
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shin_R_005
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: insect(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Insect
+      position: {x: -0.011699868, y: 0.3708458, z: 1.0453686}
+      rotation: {x: -0.000000053386675, y: 0.7071068, z: 0.7071067, w: -0.00000005338667}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: metarig
+      position: {x: 0, y: 0.77664256, z: 0.09958154}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: hips
+      position: {x: -0.000000012158431, y: 0.18284318, z: 0.50241184}
+      rotation: {x: 0.47354755, y: 0.47354743, z: -0.5251217, w: 0.5251217}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: spine
+      position: {x: -0.23034963, y: 0.00000001739091, z: -0.000000007450578}
+      rotation: {x: -0.040118106, y: 0.0600799, z: 0.0017273135, w: 0.99738556}
+      scale: {x: 1, y: 0.9999999, z: 1.0000001}
+      transformModified: 1
+    - name: chest
+      position: {x: -0.20845728, y: 0.000000017231564, z: 0.000000003179593}
+      rotation: {x: 0.00000004460448, y: -0.044832323, z: 0.000000017066768, w: 0.9989945}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1.0000001}
+      transformModified: 1
+    - name: neck
+      position: {x: -0.4312931, y: 0.00000004229868, z: 0.019341184}
+      rotation: {x: -0.0000000094387, y: 0.1550924, z: -0.00000006463982, w: 0.9879}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: head
+      position: {x: -0.54362184, y: 0.00000003902895, z: 0.000000053376425}
+      rotation: {x: -0.00000018467559, y: 0.12150508, z: -0.000000027469124, w: 0.99259084}
+      scale: {x: 0.9999998, y: 1, z: 1}
+      transformModified: 1
+    - name: shoulder_L
+      position: {x: -0.34630603, y: -0.024125246, z: 0.02371731}
+      rotation: {x: 0.38594618, y: 0.57539266, z: -0.53283346, w: -0.48585734}
+      scale: {x: 1.0000001, y: 0.99999994, z: 0.99999976}
+      transformModified: 1
+    - name: upper_arm_L
+      position: {x: -0.53922224, y: 0.03172944, z: -0.024948383}
+      rotation: {x: 0.7419277, y: 0.08319429, z: -0.06419492, w: 0.6621941}
+      scale: {x: 1, y: 1.0000001, z: 1}
+      transformModified: 1
+    - name: upper_arm_L_001
+      position: {x: -0.655479, y: 0.00000007636845, z: 0.000000014901161}
+      rotation: {x: 0.9881255, y: 0.009464447, z: 0.0008323509, w: 0.1533552}
+      scale: {x: 0.9999998, y: 0.9999999, z: 0.9999999}
+      transformModified: 1
+    - name: upper_arm_L_002
+      position: {x: -1.0808578, y: 0.00000005820766, z: -0.000000026077032}
+      rotation: {x: 0.002433398, y: 0.40762514, z: 0.12128391, w: 0.9050558}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+      transformModified: 1
+    - name: upper_arm_L_003
+      position: {x: -0.26691437, y: 0.00000006891787, z: -0.000000033527613}
+      rotation: {x: 0.17187838, y: 0.30112258, z: -0.24477239, w: 0.9054665}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.99999976}
+      transformModified: 1
+    - name: upper_arm_L_004
+      position: {x: -1.0808578, y: 0.00000005820766, z: -0.000000026077032}
+      rotation: {x: -0.0786364, y: 0.2962791, z: 0.026910404, w: 0.9514783}
+      scale: {x: 1, y: 1.0000001, z: 1}
+      transformModified: 1
+    - name: upper_arm_L_005
+      position: {x: -0.25564635, y: 0.00000003061723, z: -0.000000018626451}
+      rotation: {x: 0.95238316, y: 0.019511888, z: -0.27069694, w: 0.13895617}
+      scale: {x: 0.99999976, y: 1.0000001, z: 0.99999994}
+      transformModified: 1
+    - name: shoulder_R
+      position: {x: -0.34630603, y: 0.024125345, z: 0.023717292}
+      rotation: {x: -0.46700403, y: 0.5097109, z: 0.58716446, w: -0.42111745}
+      scale: {x: 1, y: 1, z: 1.0000001}
+      transformModified: 1
+    - name: upper_arm_R
+      position: {x: -0.5392221, y: -0.03172935, z: -0.024948476}
+      rotation: {x: -0.7518683, y: 0.051190827, z: 0.0656732, w: 0.654034}
+      scale: {x: 1, y: 1, z: 0.99999994}
+      transformModified: 1
+    - name: upper_arm_R_001
+      position: {x: -0.65547925, y: 0.000000049360096, z: -0.0000000433065}
+      rotation: {x: 0.9850156, y: -0.006518739, z: -0.0069066803, w: -0.1722038}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000004}
+      transformModified: 1
+    - name: upper_arm_R_002
+      position: {x: -1.0827113, y: 0.00000008568168, z: 0}
+      rotation: {x: 0.016367156, y: 0.45892608, z: -0.11538313, w: 0.88079834}
+      scale: {x: 0.99999994, y: 0.9999999, z: 1}
+      transformModified: 1
+    - name: upper_arm_R_003
+      position: {x: -0.2511629, y: 0.000000007450581, z: 0.000000040978193}
+      rotation: {x: -0.18490387, y: 0.17735727, z: 0.16627418, w: 0.9522121}
+      scale: {x: 0.9999999, y: 1, z: 0.99999994}
+      transformModified: 1
+    - name: upper_arm_R_004
+      position: {x: -1.0827113, y: 0.00000008568168, z: 0}
+      rotation: {x: 0.07196341, y: 0.27948898, z: -0.036621787, w: 0.9567476}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: upper_arm_R_005
+      position: {x: -0.25314572, y: 0.000000014901161, z: -0.000000044703484}
+      rotation: {x: 0.9546481, y: -0.0022145826, z: -0.2626447, w: -0.1402142}
+      scale: {x: 1.0000002, y: 0.9999998, z: 1}
+      transformModified: 1
+    - name: thigh_L
+      position: {x: 0.10811106, y: -0.5155749, z: 0.07251093}
+      rotation: {x: 0.045921948, y: 0.9618669, z: -0.26605296, w: 0.043807667}
+      scale: {x: 1, y: 1.0000002, z: 1.0000001}
+      transformModified: 1
+    - name: shin_L
+      position: {x: -0.4791516, y: 0.000000074505806, z: 0.000000007450581}
+      rotation: {x: -0.40371177, y: 0.21254346, z: -0.046683546, w: 0.8886297}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: shin_L_001
+      position: {x: -0.31128114, y: 0.000000009313226, z: -0.000000029802322}
+      rotation: {x: 0.16102491, y: 0.17009157, z: 0.004675174, w: 0.97217184}
+      scale: {x: 1, y: 0.99999976, z: 0.9999999}
+      transformModified: 1
+    - name: shin_L_002
+      position: {x: -0.41253266, y: -0.00000008754432, z: -0.000000031664968}
+      rotation: {x: 0.008567427, y: 0.35313976, z: -0.00783984, w: 0.93549854}
+      scale: {x: 1.0000001, y: 1, z: 1.0000002}
+      transformModified: 1
+    - name: shin_L_003
+      position: {x: -0.41253266, y: -0.00000008754432, z: -0.000000031664968}
+      rotation: {x: 0.0013266355, y: -0.93985385, z: 0.023285836, w: 0.34077975}
+      scale: {x: 1, y: 0.9999999, z: 0.9999998}
+      transformModified: 1
+    - name: shin_L_004
+      position: {x: -0.18237683, y: 0.00000003306195, z: -0.00000007357448}
+      rotation: {x: -0.02924335, y: -0.21441953, z: 0.22409235, w: 0.95023775}
+      scale: {x: 0.9999999, y: 0.9999998, z: 0.9999998}
+      transformModified: 1
+    - name: shin_L_005
+      position: {x: -0.18237683, y: 0.00000003306195, z: -0.00000007357448}
+      rotation: {x: 0.9434579, y: -0.24589357, z: 0.21838781, w: -0.041597616}
+      scale: {x: 0.9999996, y: 0.9999997, z: 0.99999976}
+      transformModified: 1
+    - name: thigh_R
+      position: {x: 0.10811114, y: 0.5155749, z: 0.07251069}
+      rotation: {x: -0.061247766, y: 0.95946145, z: 0.27008402, w: 0.052318268}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
+      transformModified: 1
+    - name: shin_R
+      position: {x: -0.4791516, y: 0.000000001862645, z: -0.000000015366822}
+      rotation: {x: 0.39741692, y: 0.16960013, z: 0.035630096, w: 0.9011249}
+      scale: {x: 1, y: 0.9999999, z: 1}
+      transformModified: 1
+    - name: shin_R_001
+      position: {x: -0.31128114, y: 0.000000028172508, z: -0.000000023283064}
+      rotation: {x: -0.15964341, y: 0.2969161, z: -0.019750055, w: 0.941257}
+      scale: {x: 1.0000001, y: 1, z: 0.9999999}
+      transformModified: 1
+    - name: shin_R_002
+      position: {x: -0.41253263, y: 0.000000033760443, z: -0.000000057742}
+      rotation: {x: 0.0013658523, y: 0.23120914, z: -0.00450537, w: 0.9728927}
+      scale: {x: 0.9999998, y: 1, z: 1.0000001}
+      transformModified: 1
+    - name: shin_R_003
+      position: {x: -0.41253263, y: 0.000000033760443, z: -0.000000057742}
+      rotation: {x: 0.036315236, y: -0.64158136, z: -0.029148448, w: 0.7656402}
+      scale: {x: 0.9999999, y: 0.99999976, z: 1}
+      transformModified: 1
+    - name: shin_R_004
+      position: {x: -0.18237683, y: -0.000000056810677, z: 0.000000009080395}
+      rotation: {x: 0.07428352, y: -0.3617915, z: -0.17683388, w: 0.912315}
+      scale: {x: 1.0000001, y: 1, z: 1}
+      transformModified: 1
+    - name: shin_R_005
+      position: {x: -0.18237683, y: -0.000000056810677, z: 0.000000009080395}
+      rotation: {x: 0.8963693, y: 0.24305232, z: 0.36665785, w: 0.054861028}
+      scale: {x: 0.99999994, y: 0.9999999, z: 0.9999999}
+      transformModified: 1
+    - name: hips_002
+      position: {x: -0.000000012158431, y: 0.18284318, z: 0.50241184}
+      rotation: {x: -0.4010079, y: -0.41170758, z: -0.57098997, w: 0.5862252}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+      transformModified: 1
+    - name: hips_003
+      position: {x: -0.6146747, y: 0.00000004738616, z: -0.000000003739842}
+      rotation: {x: 0.020088967, y: 0.33300626, z: 0.016440984, w: 0.9425672}
+      scale: {x: 0.9999999, y: 1, z: 1}
+      transformModified: 1
+    - name: hips_004
+      position: {x: -0.5545141, y: 0.000000037752248, z: -0.000000018626451}
+      rotation: {x: 0.00000003784727, y: 0.49550924, z: 0.000000005685639, w: 0.8686027}
+      scale: {x: 0.9999999, y: 0.99999994, z: 0.9999999}
+      transformModified: 1
+    - name: hips_005
+      position: {x: -0.5679938, y: 0.00000003591937, z: -0.00000006635673}
+      rotation: {x: 0.00000001820252, y: 0.2661802, z: 0.000000005181315, w: 0.9639233}
+      scale: {x: 0.99999976, y: 0.99999994, z: 0.99999994}
+      transformModified: 1
+    - name: hips_006
+      position: {x: -0.39766338, y: 0.000000031374203, z: 0.00000003958121}
+      rotation: {x: 0.000000019284649, y: 0.19718301, z: 0.0000000026473466, w: 0.9803667}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: hips_007
+      position: {x: -0.36479905, y: 0.000000026639942, z: -0.000000110827386}
+      rotation: {x: 0.000000014126876, y: 0.16167323, z: 7.411535e-10, w: 0.98684436}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: hips_008
+      position: {x: -0.73413885, y: 0.0000000492754, z: 0.00000015785918}
+      rotation: {x: 0.20987621, y: 0.14608169, z: 0.25953993, w: 0.9312632}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+      transformModified: 1
+    - name: hips_016
+      position: {x: -0.7511997, y: 0.00000008940697, z: -0.00000013411045}
+      rotation: {x: 0.032504532, y: 0.06473618, z: 0.003848869, w: 0.9973655}
+      scale: {x: 0.99999994, y: 1, z: 0.9999999}
+      transformModified: 1
+    - name: hips_017
+      position: {x: -0.44370586, y: -0.000000029802322, z: 0.000000074505806}
+      rotation: {x: 0.019952962, y: 0.14685324, z: 0.028958917, w: 0.98853296}
+      scale: {x: 1, y: 0.99999994, z: 1}
+      transformModified: 1
+    - name: hips_018
+      position: {x: -0.1547035, y: 0.000000059604645, z: -0.00000020116568}
+      rotation: {x: 0.98530555, y: -0.09226482, z: 0.01471375, w: 0.14298147}
+      scale: {x: 1.0000001, y: 0.9999998, z: 0.9999998}
+      transformModified: 1
+    - name: hips_019
+      position: {x: -0.19658571, y: 0.000000026077032, z: -0.00000020116568}
+      rotation: {x: 0.0852256, y: -0.07932713, z: 0.14857195, w: 0.98202354}
+      scale: {x: 1, y: 0.9999999, z: 0.9999999}
+      transformModified: 1
+    - name: hips_020
+      position: {x: -0.23506583, y: 0, z: -0.00000013038516}
+      rotation: {x: -0.1760914, y: -0.15743616, z: 0.1545155, w: 0.95933867}
+      scale: {x: 1, y: 1.0000001, z: 1}
+      transformModified: 1
+    - name: hips_021
+      position: {x: -0.47341457, y: 0.000000078231096, z: 0.000000022351742}
+      rotation: {x: 0.15437163, y: -0.12031148, z: -0.048983153, w: 0.97943616}
+      scale: {x: 0.99999994, y: 1, z: 1}
+      transformModified: 1
+    - name: hips_009
+      position: {x: -0.73413885, y: 0.0000000492754, z: 0.00000015785918}
+      rotation: {x: -0.092629, y: 0.11074203, z: -0.218857, w: 0.96501696}
+      scale: {x: 1, y: 1.0000002, z: 1}
+      transformModified: 1
+    - name: hips_010
+      position: {x: -0.7149018, y: -0.0000000144355, z: 0.00000000372529}
+      rotation: {x: 0.9711105, y: -0.11376076, z: -0.09670056, w: 0.18615009}
+      scale: {x: 0.9999999, y: 0.9999998, z: 0.9999999}
+      transformModified: 1
+    - name: hips_011
+      position: {x: -0.46699753, y: 0.00000014901161, z: 0.000000044703484}
+      rotation: {x: -0.008009727, y: -0.13670273, z: 0.05785375, w: 0.98888886}
+      scale: {x: 0.99999976, y: 0.99999994, z: 0.99999994}
+      transformModified: 1
+    - name: hips_012
+      position: {x: -0.1845169, y: -0.000000029802322, z: -0.000000052154064}
+      rotation: {x: 0.10355817, y: 0.015818216, z: -0.18463823, w: 0.97720736}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+      transformModified: 1
+    - name: hips_013
+      position: {x: -0.2084508, y: -0.00000008940697, z: -0.00000000372529}
+      rotation: {x: 0.9752293, y: -0.19848709, z: 0.066967964, w: 0.07103474}
+      scale: {x: 1.0000002, y: 1, z: 1}
+      transformModified: 1
+    - name: hips_014
+      position: {x: -0.22268109, y: -0.00000009685755, z: -0.00000017881393}
+      rotation: {x: -0.09500384, y: 0.09763378, z: 0.16007033, w: 0.9776602}
+      scale: {x: 1, y: 0.99999976, z: 0.9999999}
+      transformModified: 1
+    - name: hips_015
+      position: {x: -0.4719822, y: -0.00000000372529, z: 0.000000067055225}
+      rotation: {x: -0.21198635, y: 0.12570639, z: 0.015919305, w: 0.96902335}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
+      transformModified: 1
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: metarig
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

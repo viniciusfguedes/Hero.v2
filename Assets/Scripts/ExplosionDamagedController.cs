@@ -4,10 +4,9 @@ public class ExplosionDamagedController : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "ExplosionCollider" && this.tag == "Reptil")
+        if (other.tag == "ExplosionCollider" && this.tag == "Enemie")
         {
-            Debug.Log("Reptil");
-            this.gameObject.GetComponent<ReptilController>().Shooted();
+            this.gameObject.GetComponent<EnemieController>().Shooted();
         }
         else if (other.tag == "ExplosionCollider" && this.tag == "Wall")
         {
