@@ -5,9 +5,13 @@ public class EnemieController : MonoBehaviour
 {
     public bool Zaxis;
 
+    public int ShootsToDie;
+
     public Collider PlayerSensorArea;
 
     public Collider CurrentSensorArea;
+
+    private int shootedCount;
 
     private bool isDying;
 
@@ -223,14 +227,19 @@ public class EnemieController : MonoBehaviour
 
     public void Shooted()
     {
-        CapsuleCollider collider = this.GetComponent<CapsuleCollider>();
+        this.shootedCount += 1;
 
-        collider.center = new Vector3(0, 0, 0);
-        collider.radius = 0.05f;
-        collider.height = 0.25f;
-        collider.direction = 0;
+        if (this.shootedCount >= this.ShootsToDie)
+        {
+            CapsuleCollider collider = this.GetComponent<CapsuleCollider>();
 
-        this.isDying = true;
-        this.animatorComponent.SetTrigger("Die");
+            collider.center = new Vector3(0, 0, 0);
+            collider.radius = 0.05f;
+            collider.height = 0.25f;
+            collider.direction = 0;
+
+            this.isDying = true;
+            this.animatorComponent.SetTrigger("Die");
+        }
     }
 }
