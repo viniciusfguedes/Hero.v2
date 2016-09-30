@@ -27,143 +27,99 @@ public class PlayerController : MonoBehaviour
 
     public Image LeftArrowImage;
     public Image RightArrowImage;
-
     public GameObject AnalogJoystick;
+
     public Button FlyingButton;
     public Button WeaponButton;
     public Button LightningButton;
-
-    /// <summary>
-    /// Indica se o jogador está no chão
-    /// </summary>
+    
     public bool isGrounded = true;
 
     #endregion
 
-    #region Attributes
+    #region Sprite das setas de movimentação
 
     private Sprite leftArrowSprite;
     private Sprite leftArrowActiveSprite;
     private Sprite rightArrowSprite;
     private Sprite rightArrowActiveSprite;
 
-    private int lightningCount;
+    #endregion
+
+    #region Contadores
 
     private int diamondCount;
 
-    private bool hasGunPower;
+    private int lightningCount;
 
-    private bool isDying;
-
-    private float shootSpeed = 500f;
-
-    private GameObject shootSpawnPosition;
-
-    private float timestamp;
-
-    private float timeBetweenShots = 0.5f;
-
-    /// <summary>
-    /// Indica se a explosão foi carregada para disparar o collider com o impacto
-    /// </summary>
-    private bool isExplosionCharged;
-
-    /// <summary>
-    /// Tempo que a explosão está sendo carregada
-    /// </summary>
-    private float currentChargeTime = 0;
-
-    /// <summary>
-    /// Tamanho X do collider do personagem em idle, walk e hover
-    /// </summary>
-    private float PlayerColliderX = 0f;
-
-    /// <summary>
-    /// Tamanho X do collider do personagem em fly
-    /// </summary>
-    private float PlayerColliderXFlying = 0.3f;
-
-    /// <summary>
-    /// Indica se o personagem está se movendo horizontalmente
-    /// </summary>
-    private bool horizontalMoving = false;
-
-    /// <summary>
-    /// Indica se o jetpack está sendo desativado
-    /// </summary>
-    private bool deactivatingJetPack = false;
-
-    /// <summary>
-    /// Tempo máximo que o personagem flutua antes de cair
-    /// </summary>
-    private float deactivateTimeJetPack = 1.0f;
-
-    /// <summary>
-    /// Tempo corrido em que o jetpack está ativo
-    /// </summary>
-    private float currentActiveTimeJetPack = 0f;
-
-    /// <summary>
-    /// Tempo corrido em que o jetpack está sendo desativado
-    /// </summary>
-    private float currentDeactivationTimeJetPack = 0f;
-
-    /// <summary>
-    /// Força aplicada ao ligar o jetpack
-    /// </summary>
-    private float jetPackForce = 15.0f;
-
-    /// <summary>
-    /// Velocidade aplicada ao mover o personagem horizontalmente
-    /// </summary>
-    private float horizontalVelocity = 210f;
-
-    /// <summary>
-    /// Ponto de divisão da tela para verificar o touch do lado esquerdo ou direito
-    /// </summary>
-    private float midScreen;
-
-    /// <summary>
-    /// Posição em que o touch do lado esquerdo que controla o movimento horizontal se iniciou
-    /// </summary>
-    private Vector2 movementStartTouch;
-
-    /// <summary>
-    /// Componente collider do personagem
-    /// </summary>
-    private CapsuleCollider colliderComponente;
-
-    /// <summary>
-    /// Componente de física do personagem
-    /// </summary>
-    private Rigidbody rigidBodyComponent;
-
-    /// <summary>
-    /// Componente de animação do modelo do personagem
-    /// </summary>
-    private Animator animatorComponent;
-
-    /// <summary>
-    /// Lista com os touches ativos para controlar o que deve ser realizado 
-    /// do lado esquerdo da tela e o que deve ser realizado do lado direito da tela
-    /// </summary>
-    private List<TouchData> touches;
+    private float elapsedShootTime;
 
     #endregion
 
-    string teste = string.Empty;
+    #region Status
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 100, 20), this.transform.position.ToString());
-    }
+    private bool isDying;
+
+    private bool hasGunPower;
+
+    private bool horizontalMoving;
+    
+    private bool isExplosionCharged;
+
+    private bool deactivatingJetPack;
+
+    private float lightningCountdownTimer;
+
+    private float currentActiveTimeJetPack;
+
+    private float currentExplosionChargeTime;
+
+    private float currentDeactivationTimeJetPack;
+
+    #endregion
+
+    #region Parâmetros
+
+    private float shootSpeed = 500f;
+
+    private float jetPackForce = 15.0f;
+
+    private float timeBetweenShots = 0.5f;
+
+    private float horizontalVelocity = 210f;
+
+    private float deactivateTimeJetPack = 1.0f;
+
+    private float PlayerColliderX = 0f;
+
+    private float PlayerColliderXFlying = 0.3f;
+
+    #endregion
+
+    #region GameObjects
+
+    private Animator animatorComponent;
+
+    private Rigidbody rigidBodyComponent;
+
+    private GameObject shootSpawnPosition;
+
+    private CapsuleCollider colliderComponente;
+
+    #endregion
+
+    private float midScreen;
+
+    private List<TouchData> touches;
+
+    private Vector2 movementStartTouch;
 
     void Start()
     {
         //Define o meio da tela
         this.midScreen = Screen.width / 2.0f;
 
-        //Inicia a lista vazia
+        //Inicia a lista de toques vazia
         this.touches = new List<TouchData>();
 
         //Obtém os componentes do GameObject
@@ -171,18 +127,36 @@ public class PlayerController : MonoBehaviour
         this.rigidBodyComponent = this.GetComponent<Rigidbody>();
         this.colliderComponente = this.GetComponent<CapsuleCollider>();
 
+        //Obtém a posição de onde as descargas sairão
         this.shootSpawnPosition = GameObject.Find("ShootSpawnPosition");
 
+        //Obtém os sprites dos indicadores de movimento horizontal
         this.leftArrowSprite = Resources.Load<Sprite>("left-arrow");
         this.leftArrowActiveSprite = Resources.Load<Sprite>("left-arrow-active");
         this.rightArrowSprite = Resources.Load<Sprite>("right-arrow");
         this.rightArrowActiveSprite = Resources.Load<Sprite>("right-arrow-active");
 
+        //Ajusta a armadura inicial
         this.SetArmor(this.CurrentArmorType);
     }
 
     void Update()
     {
+        if (this.lightningCount > 1)
+        {
+            this.lightningCountdownTimer += Time.deltaTime;
+
+            if (this.lightningCountdownTimer >= 60f)
+            {
+                this.lightningCount += 1;
+                this.lightningCountdownTimer = 0;
+            }
+        }
+        else
+        {
+            this.lightningCountdownTimer = 0;
+        }
+
         //Botão sair
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -312,7 +286,7 @@ public class PlayerController : MonoBehaviour
                         if (this.CurrentArmorType == ArmorType.FlyingArmor)
                         {
                             this.ActiveJetPack();
-                            this.currentChargeTime = 0;
+                            this.currentExplosionChargeTime = 0;
                             this.ParticleCharging.SetActive(false);
                         }
                         else if (this.CurrentArmorType == ArmorType.LightningArmor)
@@ -320,13 +294,13 @@ public class PlayerController : MonoBehaviour
                             //Somente ativa o lightning caso o jogador esteja no chão e parado
                             if (this.isGrounded && !this.horizontalMoving && this.lightningCount > 0)
                             {
-                                this.currentChargeTime += Time.deltaTime;
+                                this.currentExplosionChargeTime += Time.deltaTime;
                                 this.ParticleCharging.SetActive(true);
 
-                                if (this.currentChargeTime >= 1.5f)
+                                if (this.currentExplosionChargeTime >= 1.5f)
                                 {
                                     //Limpa o contador de tempo
-                                    this.currentChargeTime = 0;
+                                    this.currentExplosionChargeTime = 0;
 
                                     //Desativa as particulas de carregamento
                                     this.ParticleCharging.SetActive(false);
@@ -343,7 +317,7 @@ public class PlayerController : MonoBehaviour
                             }
                             else
                             {
-                                this.currentChargeTime = 0;
+                                this.currentExplosionChargeTime = 0;
                                 this.ParticleCharging.SetActive(false);
                             }
                         }
@@ -394,7 +368,7 @@ public class PlayerController : MonoBehaviour
                         else if (this.CurrentArmorType == ArmorType.LightningArmor)
                         {
                             //Limpa o contador de tempo
-                            this.currentChargeTime = 0;
+                            this.currentExplosionChargeTime = 0;
 
                             //Desativa as particulas de carregamento
                             this.ParticleCharging.SetActive(false);
@@ -423,7 +397,14 @@ public class PlayerController : MonoBehaviour
             this.touches = new List<TouchData>();
         }
 
-        GameObject.Find("DiamondCount").GetComponent<Text>().text = diamondCount.ToString() + "/5";
+        GameObject.Find("DiamondCount").GetComponent<Text>().text = this.diamondCount.ToString() + "/5";
+
+        if (this.lightningCount == 0)
+            GameObject.Find("LightningCount").GetComponent<Text>().text = string.Empty;
+        else
+            GameObject.Find("LightningCount").GetComponent<Text>().text = this.lightningCount.ToString() + "x";
+        
+
     }
 
     void FixedUpdate()
@@ -468,16 +449,25 @@ public class PlayerController : MonoBehaviour
 
         #region GroundCheck
 
-        float distance = 0.05f;
+        float distance = 0.1f;
         Vector3 direction = Vector3.down;
-        RaycastHit hit = new RaycastHit();
-        Vector3 position = new Vector3(transform.position.x, transform.position.y + 0.05f, transform.position.z);
+        RaycastHit hit1 = new RaycastHit();
+        RaycastHit hit2 = new RaycastHit();
 
-        Debug.DrawRay(position, direction * distance, Color.yellow);
+        Vector3 position1 = new Vector3(transform.position.x + 0.25f, transform.position.y + 0.1f, transform.position.z);
+        Vector3 position2 = new Vector3(transform.position.x - 0.25f, transform.position.y + 0.1f, transform.position.z);
 
-        if (Physics.Raycast(position, direction, out hit, distance))
+        Debug.DrawRay(position1, direction * distance, Color.yellow);
+        Debug.DrawRay(position2, direction * distance, Color.yellow);
+
+        bool rayResult1 = Physics.Raycast(position1, direction, out hit1, distance);
+        bool rayResult2 = Physics.Raycast(position2, direction, out hit2, distance);
+
+        if (rayResult1 || rayResult2)
         {
-            if (hit.collider.gameObject.CompareTag("Ground"))
+            RaycastHit currentHit = rayResult1 ? hit1 : hit2;
+
+            if (currentHit.collider.gameObject.CompareTag("Ground"))
             {
                 this.isGrounded = true;
                 this.animatorComponent.SetBool("IsGrounded", true);
@@ -527,22 +517,13 @@ public class PlayerController : MonoBehaviour
                 this.StartDie();
                 break;
             case "LightningPower":
-
                 this.lightningCount += 2;
-                Sprite lightningSprite = Resources.Load<Sprite>("lightning-icon");
-                ((Image)LightningButton.GetComponent<Image>()).sprite = lightningSprite;
-
                 Destroy(other.gameObject);
                 break;
             case "GunPower":
-
                 this.hasGunPower = true;
-                Sprite gunSprite = Resources.Load<Sprite>("gun-icon");
-                ((Image)WeaponButton.GetComponent<Image>()).sprite = gunSprite;
-
                 Destroy(other.gameObject);
                 break;
-
             case "Diamond":
                 this.diamondCount += 1;
                 Destroy(other.gameObject);
@@ -573,6 +554,7 @@ public class PlayerController : MonoBehaviour
 
     private void ActiveJetPack()
     {
+        this.ParticleSetArmor.SetActive(false);
         this.animatorComponent.SetBool("IsGrounded", false);
         this.animatorComponent.SetBool("IsOnHorizontalMovement", this.horizontalMoving);
 
@@ -668,9 +650,9 @@ public class PlayerController : MonoBehaviour
 
     void Shot()
     {
-        if (Time.time >= this.timestamp)
+        if (Time.time >= this.elapsedShootTime)
         {
-            this.timestamp = Time.time + this.timeBetweenShots;
+            this.elapsedShootTime = Time.time + this.timeBetweenShots;
             this.animatorComponent.SetTrigger("IsShotting");
 
             GameObject projectile = Instantiate(this.LightningShoot, this.shootSpawnPosition.transform.position, Quaternion.identity) as GameObject;

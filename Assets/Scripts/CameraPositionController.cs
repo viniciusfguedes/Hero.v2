@@ -20,7 +20,6 @@ public class CameraPositionController : MonoBehaviour
     {
         Vector3 position = Camera.main.transform.position;
 
-        
         if(this.transform.position.x > 18.2f)
             position.x = BLOCK_002_X;
         else if (this.transform.position.x > 6.59f)
@@ -44,6 +43,14 @@ public class CameraPositionController : MonoBehaviour
             position.y = FLOOR_006_Y;
         else
             position.y = FLOOR_007_Y;
+
+        if (Camera.main.transform.position != position)
+        {
+            GameObject particleSetArmor = this.GetComponent<PlayerController>().ParticleSetArmor;
+
+            if(particleSetArmor != null)
+                particleSetArmor.SetActive(false);
+        }
 
         Camera.main.transform.position = position;
     }
