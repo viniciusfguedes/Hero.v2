@@ -8,7 +8,7 @@ public class ExplosionDamagedController : MonoBehaviour
         {
             this.gameObject.GetComponent<EnemieController>().Shooted();
         }
-        else if (other.tag == "ExplosionCollider" && this.tag == "Wall")
+        else if (other.tag == "ExplosionCollider" && this.tag == "LavaWall")
         {
             Destroy(this.gameObject);
         }

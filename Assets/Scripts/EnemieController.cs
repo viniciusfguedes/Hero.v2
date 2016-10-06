@@ -195,6 +195,7 @@ public class EnemieController : MonoBehaviour
 
     void FinishedAttack()
     {
+        Debug.Log("FinishedAttack");
         float distance = 0.4f;
         RaycastHit hit = new RaycastHit();
 
@@ -237,6 +238,7 @@ public class EnemieController : MonoBehaviour
             collider.radius = 0.05f;
             collider.height = 0.25f;
             collider.direction = 0;
+            collider.isTrigger = true;
 
             this.isDying = true;
             this.animatorComponent.SetTrigger("Die");

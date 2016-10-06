@@ -63,7 +63,9 @@ public class PlayerController : MonoBehaviour
     private bool hasGunPower;
 
     private bool horizontalMoving;
-    
+
+    private bool hasLightningPower;
+
     private bool isExplosionCharged;
 
     private bool deactivatingJetPack;
@@ -142,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (this.lightningCount > 1)
+        if (this.hasLightningPower)
         {
             this.lightningCountdownTimer += Time.deltaTime;
 
@@ -518,11 +520,13 @@ public class PlayerController : MonoBehaviour
                 break;
             case "LightningPower":
                 this.lightningCount += 2;
+                this.hasLightningPower = true; 
                 Destroy(other.gameObject);
                 break;
             case "GunPower":
                 this.hasGunPower = true;
                 Destroy(other.gameObject);
+                GameObject.Find("Level").GetComponent<LevelController>().ShowWeaponTutorial = true;
                 break;
             case "Diamond":
                 this.diamondCount += 1;
@@ -548,6 +552,12 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "LavaWall")
+            GameObject.Find("Level").GetComponent<LevelController>().ShowLavaWallTutorial = true;
     }
 
     #region Jetpack control
