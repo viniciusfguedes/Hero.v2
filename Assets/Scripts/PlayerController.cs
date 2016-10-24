@@ -96,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
     private float PlayerColliderXFlying = 0.3f;
 
+    private PreferencesController preferences;
+
     #endregion
 
     #region GameObjects
@@ -118,6 +120,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        //Preferências
+        this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
+
         //Define o meio da tela
         this.midScreen = Screen.width / 2.0f;
 
@@ -161,10 +166,7 @@ public class PlayerController : MonoBehaviour
 
         //Botão sair
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //TODO: Exibir o menu de pause
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+            SceneManager.LoadScene("000_LevelMenu");
 
         //Touches
         if (Input.touches.Length > 0 && !this.isDying)
@@ -175,22 +177,25 @@ public class PlayerController : MonoBehaviour
 
                 if (touch.phase == TouchPhase.Began)
                 {
-                    //Identifica o lado que o touch iniciou
-                    TouchSide touchSide = touch.position.x < midScreen ? TouchSide.Left : TouchSide.Right;
-
                     //Define o ponto central de controle da movimentação horizontal
-                    if (touchSide == TouchSide.Left)
-                        this.movementStartTouch = touch.position;
-                    else if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
                     {
-                        if (this.CurrentArmorType == ArmorType.FlyingArmor)
-                            this.ActiveJetPack();
-                        else if (this.CurrentArmorType == ArmorType.ShottingArmor)
-                            this.Shot();
-                    }
+                        //Identifica o lado que o touch iniciou
+                        TouchSide touchSide = touch.position.x < midScreen ? TouchSide.Left : TouchSide.Right;
 
-                    //Guarda a posição inicial do touch
-                    this.touches.Add(new TouchData(touch.fingerId, touch.position, Time.time, touchSide));
+                        if (touchSide == TouchSide.Left)
+                            this.movementStartTouch = touch.position;
+                        else
+                        {
+                            if (this.CurrentArmorType == ArmorType.FlyingArmor)
+                                this.ActiveJetPack();
+                            else if (this.CurrentArmorType == ArmorType.ShottingArmor)
+                                this.Shot();
+                        }
+
+                        //Guarda a posição inicial do touch
+                        this.touches.Add(new TouchData(touch.fingerId, touch.position, Time.time, touchSide));
+                    }
                 }
 
                 #endregion
@@ -405,8 +410,6 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("LightningCount").GetComponent<Text>().text = string.Empty;
         else
             GameObject.Find("LightningCount").GetComponent<Text>().text = this.lightningCount.ToString() + "x";
-        
-
     }
 
     void FixedUpdate()

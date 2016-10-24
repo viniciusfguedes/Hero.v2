@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 using UnityEngine.SceneManagement;
@@ -25,9 +24,13 @@ public class LevelController : MonoBehaviour
     private bool weaponTutorialDone;
     private bool lavaWallTutorialDone;
     private bool horizontalMovementTutorialDone;
+    private PreferencesController preferences;
 
     void Start()
     {
+        this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
+
+        this.ShowTutorial = this.preferences.ShowTutorial;
         this.TutorialGameObject.SetActive(false);
         float minute = Mathf.Floor(this.CountdownTimer / 60);
         float seconds = this.CountdownTimer % 60;
