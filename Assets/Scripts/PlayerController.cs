@@ -168,6 +168,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("000_LevelMenu");
 
+        if (Input.GetKey(KeyCode.Space))
+            this.ActiveJetPack();
+
         //Touches
         if (Input.touches.Length > 0 && !this.isDying)
         {
@@ -516,7 +519,21 @@ public class PlayerController : MonoBehaviour
                         enemie.GetComponent<EnemieController>().PlayerSensorArea = other;
                 break;
             case "SpaceMan":
+
+                //Completou a fase
+                int stars = 1;
+
+                //Pegou todos os diamantes
+                if (this.diamondCount == 5)
+                    stars += 1;
+
+                //Terminou a fase em menos de dois minutos
+                if (GameObject.Find("Level").GetComponent<LevelController>().CountdownTimer >= 150)
+                    stars += 1;
+
+                this.preferences.Level001Stars = System.Math.Max(this.preferences.Level001Stars, stars);
                 GameObject.Find("Level").GetComponent<LevelController>().PlayerWon = true;
+
                 break;
             case "Lava":
                 this.StartDie();
@@ -679,7 +696,8 @@ public class PlayerController : MonoBehaviour
 
     void FinishedDie()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //Exibir mensagem de derrota
+        SceneManager.LoadScene("000_LevelMenu");
     }
 
     void SetColliderDeath()

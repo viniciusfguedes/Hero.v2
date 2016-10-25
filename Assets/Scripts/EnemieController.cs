@@ -87,6 +87,12 @@ public class EnemieController : MonoBehaviour
                 }
                 else
                 {
+                    if (Math.Round(this.target.transform.position.x, 1) == Math.Round(this.transform.position.x, 1))
+                    {
+                        this.isEnemieMoving = false;
+                        return;
+                    }
+
                     if (this.target.transform.position.x < this.transform.position.x)
                     {
                         if (this.Zaxis)
@@ -100,7 +106,7 @@ public class EnemieController : MonoBehaviour
                             this.transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
                         }
                     }
-                    else
+                    else if (this.target.transform.position.x > this.transform.position.x)
                     {
                         if (this.Zaxis)
                         {
@@ -195,7 +201,6 @@ public class EnemieController : MonoBehaviour
 
     void FinishedAttack()
     {
-        Debug.Log("FinishedAttack");
         float distance = 0.4f;
         RaycastHit hit = new RaycastHit();
 

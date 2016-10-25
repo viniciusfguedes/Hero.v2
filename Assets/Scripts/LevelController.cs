@@ -13,6 +13,11 @@ public class LevelController : MonoBehaviour
     public float CountdownTimer;
     public Text CurrentCountdownText;
 
+    public GameObject Star001;
+    public GameObject Star002;
+    public GameObject Star003;
+
+    public GameObject WonPanelGameObject;
     public GameObject TutorialGameObject;
     public GameObject FlyingTutorialGameObject;
     public GameObject WeaponTutorialGameObject;
@@ -97,12 +102,24 @@ public class LevelController : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                //Exibir mensagem de derrota
+                SceneManager.LoadScene("000_LevelMenu");
             }
 
             if (this.PlayerWon)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Sprite starPrinted = Resources.Load<Sprite>("star-printed");
+
+                if (this.preferences.Level001Stars >= 1)
+                    this.Star001.GetComponent<Image>().sprite = starPrinted;
+
+                if (this.preferences.Level001Stars >= 2)
+                    this.Star002.GetComponent<Image>().sprite = starPrinted;
+
+                if (this.preferences.Level001Stars >= 3)
+                    this.Star003.GetComponent<Image>().sprite = starPrinted;
+
+                this.WonPanelGameObject.SetActive(true);
             }
         }
     }

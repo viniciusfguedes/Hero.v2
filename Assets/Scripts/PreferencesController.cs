@@ -6,6 +6,7 @@ public class PreferencesController : MonoBehaviour
     private bool? showTutorial;
     private float? musicVolume;
     private float? effectsVolume;
+    private int? level001Stars;
 
     public bool ShowTutorial
     {
@@ -52,6 +53,22 @@ public class PreferencesController : MonoBehaviour
         {
             this.effectsVolume = value;
             PlayerPrefs.SetFloat("EffectsVolume", value);
+        }
+    }
+
+    public int Level001Stars
+    {
+        get
+        {
+            if (!this.level001Stars.HasValue)
+                this.level001Stars = PlayerPrefs.GetInt("level001Stars", 0);
+
+            return this.level001Stars.Value;
+        }
+        set
+        {
+            this.level001Stars = value;
+            PlayerPrefs.SetInt("level001Stars", value);
         }
     }
 }

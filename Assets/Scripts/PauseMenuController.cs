@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour {
 
+    public GameObject Star001;
+    public GameObject Star002;
+    public GameObject Star003;
     public GameObject PauseMenu;
 
     public Slider SliderMusicVolume;
@@ -16,6 +19,17 @@ public class PauseMenuController : MonoBehaviour {
         this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
         this.SliderMusicVolume.onValueChanged.AddListener(delegate { PauseMenuMusicVolumeChanged(); });
         this.SliderEffectsVolume.onValueChanged.AddListener(delegate { PauseMenuEffectsVolumeChanged(); });
+
+        Sprite starPrinted = Resources.Load<Sprite>("star-printed");
+
+        if (this.preferences.Level001Stars >= 1)
+            this.Star001.GetComponent<Image>().sprite = starPrinted;
+
+        if (this.preferences.Level001Stars >= 2)
+            this.Star002.GetComponent<Image>().sprite = starPrinted;
+
+        if (this.preferences.Level001Stars >= 3)
+            this.Star003.GetComponent<Image>().sprite = starPrinted;
     }
 
     void Update()
