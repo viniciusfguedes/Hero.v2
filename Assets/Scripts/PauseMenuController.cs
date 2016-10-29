@@ -4,9 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour {
 
-    public GameObject Star001;
-    public GameObject Star002;
-    public GameObject Star003;
     public GameObject PauseMenu;
 
     public Slider SliderMusicVolume;
@@ -19,17 +16,6 @@ public class PauseMenuController : MonoBehaviour {
         this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
         this.SliderMusicVolume.onValueChanged.AddListener(delegate { PauseMenuMusicVolumeChanged(); });
         this.SliderEffectsVolume.onValueChanged.AddListener(delegate { PauseMenuEffectsVolumeChanged(); });
-
-        Sprite starPrinted = Resources.Load<Sprite>("star-printed");
-
-        if (this.preferences.Level001Stars >= 1)
-            this.Star001.GetComponent<Image>().sprite = starPrinted;
-
-        if (this.preferences.Level001Stars >= 2)
-            this.Star002.GetComponent<Image>().sprite = starPrinted;
-
-        if (this.preferences.Level001Stars >= 3)
-            this.Star003.GetComponent<Image>().sprite = starPrinted;
     }
 
     void Update()
@@ -43,11 +29,11 @@ public class PauseMenuController : MonoBehaviour {
     /// </summary>
     public void PauseMenuOpenClick()
     {
+        Time.timeScale = 0;
         this.SliderMusicVolume.value = this.preferences.MusicVolume;
         this.SliderEffectsVolume.value = this.preferences.EffectsVolume;
 
         this.PauseMenu.SetActive(true);
-        Time.timeScale = 0;
     }
 
     /// <summary>
@@ -55,8 +41,8 @@ public class PauseMenuController : MonoBehaviour {
     /// </summary>
     public void PauseMenuRestartClick()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
@@ -80,8 +66,8 @@ public class PauseMenuController : MonoBehaviour {
     /// </summary>
     public void PauseMenuQuitClick()
     {
-        SceneManager.LoadScene("000_LevelMenu");
         Time.timeScale = 1;
+        SceneManager.LoadScene("000_LevelMenu");
     }
 
     /// <summary>
@@ -89,7 +75,7 @@ public class PauseMenuController : MonoBehaviour {
     /// </summary>
     public void PauseMenuDoneClick()
     {
-        this.PauseMenu.SetActive(false);
         Time.timeScale = 1;
+        this.PauseMenu.SetActive(false);
     }
 }

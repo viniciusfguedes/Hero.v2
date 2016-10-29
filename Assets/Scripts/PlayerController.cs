@@ -120,6 +120,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
+
         //Preferências
         this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
 
@@ -149,6 +151,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Carrega o poder de explosão à cada 1 minuto
         if (this.hasLightningPower)
         {
             this.lightningCountdownTimer += Time.deltaTime;
@@ -167,9 +170,6 @@ public class PlayerController : MonoBehaviour
         //Botão sair
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("000_LevelMenu");
-
-        if (Input.GetKey(KeyCode.Space))
-            this.ActiveJetPack();
 
         //Touches
         if (Input.touches.Length > 0 && !this.isDying)
@@ -696,8 +696,8 @@ public class PlayerController : MonoBehaviour
 
     void FinishedDie()
     {
-        //Exibir mensagem de derrota
-        SceneManager.LoadScene("000_LevelMenu");
+        Time.timeScale = 0f;
+        GameObject.Find("Level").GetComponent<LevelController>().GameOver = true;
     }
 
     void SetColliderDeath()

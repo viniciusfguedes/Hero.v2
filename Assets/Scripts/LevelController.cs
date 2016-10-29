@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
+    public bool GameOver;
     public bool PlayerWon;
     public bool ShowTutorial;
     public bool ShowWeaponTutorial;
@@ -18,6 +19,8 @@ public class LevelController : MonoBehaviour
     public GameObject Star003;
 
     public GameObject WonPanelGameObject;
+    public GameObject OverPanelGameObject;
+
     public GameObject TutorialGameObject;
     public GameObject FlyingTutorialGameObject;
     public GameObject WeaponTutorialGameObject;
@@ -101,10 +104,7 @@ public class LevelController : MonoBehaviour
                                                                (seconds == 60f ? 0 : seconds).ToString("00"));
             }
             else
-            {
-                //Exibir mensagem de derrota
-                SceneManager.LoadScene("000_LevelMenu");
-            }
+                this.GameOver = true;
 
             if (this.PlayerWon)
             {
@@ -120,6 +120,12 @@ public class LevelController : MonoBehaviour
                     this.Star003.GetComponent<Image>().sprite = starPrinted;
 
                 this.WonPanelGameObject.SetActive(true);
+            }
+
+            if (this.GameOver)
+            {
+                this.OverPanelGameObject.SetActive(true);
+                Time.timeScale = 0;
             }
         }
     }
