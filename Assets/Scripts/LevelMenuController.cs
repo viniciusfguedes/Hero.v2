@@ -14,6 +14,10 @@ public class LevelMenuController : MonoBehaviour {
     void Start()
     {
         this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
+
+        this.GetComponent<AudioSource>().volume = this.preferences.EffectsVolume;
+        Camera.main.GetComponent<AudioSource>().volume = this.preferences.MusicVolume;
+
         this.SetStars();
     }
 

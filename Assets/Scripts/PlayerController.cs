@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     
     public bool isGrounded = true;
 
+    public AudioClip CollectItem;
+    public AudioClip ExplosionSound;
+
     #endregion
 
     #region Sprite das setas de movimentação
@@ -59,6 +62,8 @@ public class PlayerController : MonoBehaviour
     #region Status
 
     private bool isDying;
+
+    private bool isFlying;
 
     private bool hasGunPower;
 
@@ -118,12 +123,20 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movementStartTouch;
 
+    //void OnGUI()
+    //{
+    //    GUI.Label(new Rect(0, 0, 100, 50), Time.deltaTime.ToString());
+    //}
+
     void Start()
     {
         Time.timeScale = 1;
 
         //Preferências
         this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
+
+        //Volume dos efeitos sonoros
+        this.GetComponent<AudioSource>().volume = this.preferences.EffectsVolume;
 
         //Define o meio da tela
         this.midScreen = Screen.width / 2.0f;
@@ -191,9 +204,18 @@ public class PlayerController : MonoBehaviour
                         else
                         {
                             if (this.CurrentArmorType == ArmorType.FlyingArmor)
-                                this.ActiveJetPack();
+                            {
+                                this.isFlying = true;
+                            }
                             else if (this.CurrentArmorType == ArmorType.ShottingArmor)
+                            {
                                 this.Shot();
+                                this.isFlying = false;
+                            }
+                            else
+                            {
+                                this.isFlying = false;
+                            }
                         }
 
                         //Guarda a posição inicial do touch
@@ -295,17 +317,23 @@ public class PlayerController : MonoBehaviour
                         //Ativa ou mantém o jetpack ativo
                         if (this.CurrentArmorType == ArmorType.FlyingArmor)
                         {
-                            this.ActiveJetPack();
+                            this.isFlying = true;
                             this.currentExplosionChargeTime = 0;
                             this.ParticleCharging.SetActive(false);
+                            this.GetComponent<AudioSource>().Stop();
                         }
                         else if (this.CurrentArmorType == ArmorType.LightningArmor)
                         {
+                            this.isFlying = false;
+
                             //Somente ativa o lightning caso o jogador esteja no chão e parado
                             if (this.isGrounded && !this.horizontalMoving && this.lightningCount > 0)
                             {
                                 this.currentExplosionChargeTime += Time.deltaTime;
                                 this.ParticleCharging.SetActive(true);
+
+                                this.GetComponent<AudioSource>().clip = this.ExplosionSound;
+                                this.GetComponent<AudioSource>().Play();
 
                                 if (this.currentExplosionChargeTime >= 1.5f)
                                 {
@@ -314,6 +342,8 @@ public class PlayerController : MonoBehaviour
 
                                     //Desativa as particulas de carregamento
                                     this.ParticleCharging.SetActive(false);
+
+                                    this.GetComponent<AudioSource>().Stop();
 
                                     //Desativa as particulas de explosão
                                     this.ParticleExplosion.SetActive(false);
@@ -329,11 +359,13 @@ public class PlayerController : MonoBehaviour
                             {
                                 this.currentExplosionChargeTime = 0;
                                 this.ParticleCharging.SetActive(false);
+                                this.GetComponent<AudioSource>().Stop();
                             }
                         }
                         else
                         {
                             this.Shot();
+                            this.isFlying = false;
                         }
 
                         #endregion
@@ -372,6 +404,8 @@ public class PlayerController : MonoBehaviour
 
                         if (this.CurrentArmorType == ArmorType.FlyingArmor)
                         {
+                            this.isFlying = false;
+
                             //Mantém o personagem flutuando por um tempo antes de mandá-lo de volta para o chão
                             this.StartDeactiveJetPack();
                         }
@@ -382,6 +416,8 @@ public class PlayerController : MonoBehaviour
 
                             //Desativa as particulas de carregamento
                             this.ParticleCharging.SetActive(false);
+
+                            this.GetComponent<AudioSource>().Stop();
 
                             //Desativa as particulas de explosão
                             this.ParticleExplosion.SetActive(false);
@@ -418,6 +454,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         #region Jetpack
+
+        if(this.isFlying)
+        {
+            this.ActiveJetPack();
+        }
 
         if (this.currentDeactivationTimeJetPack > 0)
         {
@@ -525,11 +566,17 @@ public class PlayerController : MonoBehaviour
 
                 //Pegou todos os diamantes
                 if (this.diamondCount == 5)
+                {
                     stars += 1;
+                    this.preferences.DiamondCollected = true;
+                }
 
-                //Terminou a fase em menos de dois minutos
+                //Terminou a fase em menos de dois minutos e meio
                 if (GameObject.Find("Level").GetComponent<LevelController>().CountdownTimer >= 150)
+                {
                     stars += 1;
+                    this.preferences.BestTime = true;
+                }
 
                 this.preferences.Level001Stars = System.Math.Max(this.preferences.Level001Stars, stars);
                 GameObject.Find("Level").GetComponent<LevelController>().PlayerWon = true;
@@ -540,17 +587,30 @@ public class PlayerController : MonoBehaviour
                 break;
             case "LightningPower":
                 this.lightningCount += 2;
-                this.hasLightningPower = true; 
+                this.hasLightningPower = true;
+
                 Destroy(other.gameObject);
+
+                this.GetComponent<AudioSource>().clip = this.CollectItem;
+                this.GetComponent<AudioSource>().Play();
+
                 break;
             case "GunPower":
                 this.hasGunPower = true;
                 Destroy(other.gameObject);
                 GameObject.Find("Level").GetComponent<LevelController>().ShowWeaponTutorial = true;
+
+                this.GetComponent<AudioSource>().clip = this.CollectItem;
+                this.GetComponent<AudioSource>().Play();
+
                 break;
             case "Diamond":
                 this.diamondCount += 1;
                 Destroy(other.gameObject);
+
+                this.GetComponent<AudioSource>().clip = this.CollectItem;
+                this.GetComponent<AudioSource>().Play();
+
                 break;
             default:
                 break;
@@ -708,6 +768,7 @@ public class PlayerController : MonoBehaviour
     public void StartDie()
     {
         this.isDying = true;
+        this.isFlying = false;
         this.rigidBodyComponent.useGravity = true;
         this.rigidBodyComponent.velocity = Vector3.zero;
         this.animatorComponent.SetTrigger("IsDying");

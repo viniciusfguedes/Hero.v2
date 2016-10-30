@@ -37,6 +37,7 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
+        Camera.main.GetComponent<AudioSource>().volume = this.preferences.MusicVolume;
 
         this.ShowTutorial = this.preferences.ShowTutorial;
         this.TutorialGameObject.SetActive(false);
@@ -110,13 +111,15 @@ public class LevelController : MonoBehaviour
             {
                 Sprite starPrinted = Resources.Load<Sprite>("star-printed");
 
-                if (this.preferences.Level001Stars >= 1)
-                    this.Star001.GetComponent<Image>().sprite = starPrinted;
+                //Fase concluída
+                this.Star001.GetComponent<Image>().sprite = starPrinted;
 
-                if (this.preferences.Level001Stars >= 2)
+                //Diamantes coletados
+                if (this.preferences.DiamondCollected)
                     this.Star002.GetComponent<Image>().sprite = starPrinted;
 
-                if (this.preferences.Level001Stars >= 3)
+                //Dentro de 2 minutos e meio
+                if (this.preferences.BestTime)
                     this.Star003.GetComponent<Image>().sprite = starPrinted;
 
                 this.WonPanelGameObject.SetActive(true);

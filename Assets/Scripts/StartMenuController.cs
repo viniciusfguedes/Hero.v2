@@ -15,6 +15,9 @@ public class StartMenuController : MonoBehaviour
     {
         this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
 
+        this.GetComponent<AudioSource>().volume = this.preferences.EffectsVolume;
+        Camera.main.GetComponent<AudioSource>().volume = this.preferences.MusicVolume;
+
         this.SliderMusicVolume.onValueChanged.AddListener(delegate { OptionsMusicVolumeChanged(); });
         this.SliderEffectsVolume.onValueChanged.AddListener(delegate { OptionsEffectsVolumeChanged(); });
     }
@@ -81,6 +84,7 @@ public class StartMenuController : MonoBehaviour
     public void OptionsMusicVolumeChanged()
     {
         this.preferences.MusicVolume = this.SliderMusicVolume.value;
+        Camera.main.GetComponent<AudioSource>().volume = this.SliderMusicVolume.value;
     }
 
     /// <summary>
@@ -89,6 +93,12 @@ public class StartMenuController : MonoBehaviour
     public void OptionsEffectsVolumeChanged()
     {
         this.preferences.EffectsVolume = this.SliderEffectsVolume.value;
+
+        AudioSource[] audioSources = GameObject.Find("Root").GetComponentsInChildren<AudioSource>();
+
+        foreach (AudioSource audioSource in audioSources)
+            if(audioSource.gameObject.tag != "MainCamera")
+                audioSource.volume = this.SliderEffectsVolume.value;
     }
 
     /// <summary>

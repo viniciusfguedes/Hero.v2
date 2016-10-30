@@ -8,6 +8,9 @@ public class PreferencesController : MonoBehaviour
     private float? effectsVolume;
     private int? level001Stars;
 
+    private bool? bestTime;
+    private bool? diamondCollected;
+
     public bool ShowTutorial
     {
         get
@@ -69,6 +72,38 @@ public class PreferencesController : MonoBehaviour
         {
             this.level001Stars = value;
             PlayerPrefs.SetInt("level001Stars", value);
+        }
+    }
+
+    public bool BestTime
+    {
+        get
+        {
+            if (!this.bestTime.HasValue)
+                this.bestTime = Convert.ToBoolean(PlayerPrefs.GetInt("BestTime", 0));
+
+            return this.bestTime.Value;
+        }
+        set
+        {
+            this.bestTime = value;
+            PlayerPrefs.SetInt("BestTime", Convert.ToInt32(value));
+        }
+    }
+
+    public bool DiamondCollected
+    {
+        get
+        {
+            if (!this.diamondCollected.HasValue)
+                this.diamondCollected = Convert.ToBoolean(PlayerPrefs.GetInt("DiamondCollected", 0));
+
+            return this.diamondCollected.Value;
+        }
+        set
+        {
+            this.diamondCollected = value;
+            PlayerPrefs.SetInt("DiamondCollected", Convert.ToInt32(value));
         }
     }
 }

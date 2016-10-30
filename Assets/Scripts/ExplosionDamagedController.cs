@@ -2,6 +2,14 @@
 
 public class ExplosionDamagedController : MonoBehaviour
 {
+    void Start()
+    {
+        AudioSource audioSource = this.GetComponent<AudioSource>();
+
+        if (audioSource != null)
+            this.GetComponent<AudioSource>().volume = GameObject.Find("PreferencesController").GetComponent<PreferencesController>().EffectsVolume;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "ExplosionCollider" && this.tag == "Enemie")
@@ -10,7 +18,9 @@ public class ExplosionDamagedController : MonoBehaviour
         }
         else if (other.tag == "ExplosionCollider" && this.tag == "LavaWall")
         {
-            Destroy(this.gameObject);
+            this.GetComponent<AudioSource>().Play();
+            this.GetComponent<Renderer>().enabled = false;
+            Destroy(this.gameObject, 1);
         }
     }
 }

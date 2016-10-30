@@ -11,6 +11,12 @@ public class EnemieController : MonoBehaviour
 
     public Collider CurrentSensorArea;
 
+    public AudioClip AttackSoundEffect;
+
+    public AudioClip DeathSoundEffect;
+
+    public AudioClip WalkingSoundEffect;
+
     private int shootedCount;
 
     private bool isDying;
@@ -55,8 +61,12 @@ public class EnemieController : MonoBehaviour
     /// </summary>
     private Rigidbody rigidBodyComponent;
 
+    private bool played;
+
     void Start()
     {
+        this.GetComponent<AudioSource>().volume = GameObject.Find("PreferencesController").GetComponent<PreferencesController>().EffectsVolume;
+
         this.sqrMaxVelocity = this.MaxVelocity * this.MaxVelocity;
         this.startXPosition = Convert.ToInt32(this.transform.position.x);
 
@@ -70,6 +80,18 @@ public class EnemieController : MonoBehaviour
         if (this.isDying)
         {
             this.rigidBodyComponent.velocity = Vector3.zero;
+
+            if(!this.played)
+            {
+                if (this.DeathSoundEffect != null)
+                {
+                    this.GetComponent<AudioSource>().clip = this.DeathSoundEffect;
+                    this.GetComponent<AudioSource>().loop = false;
+                    this.GetComponent<AudioSource>().Play();
+                }
+                this.played = true;
+            }
+
             return;
         }
         
@@ -90,7 +112,16 @@ public class EnemieController : MonoBehaviour
                     if (Math.Round(this.target.transform.position.x, 1) == Math.Round(this.transform.position.x, 1))
                     {
                         this.isEnemieMoving = false;
+                        this.GetComponent<AudioSource>().loop = false;
+                        this.GetComponent<AudioSource>().Stop();
                         return;
+                    }
+
+                    if(this.WalkingSoundEffect != null && !this.GetComponent<AudioSource>().isPlaying)
+                    {
+                        this.GetComponent<AudioSource>().clip = this.WalkingSoundEffect;
+                        this.GetComponent<AudioSource>().loop = true;
+                        this.GetComponent<AudioSource>().Play();
                     }
 
                     if (this.target.transform.position.x < this.transform.position.x)
@@ -130,6 +161,9 @@ public class EnemieController : MonoBehaviour
 
                 if (currentPosition != this.startXPosition)
                 {
+                    this.GetComponent<AudioSource>().loop = false;
+                    this.GetComponent<AudioSource>().Stop();
+
                     //Ultrapassou a velocidade máxima permitida
                     if (this.rigidBodyComponent.velocity.sqrMagnitude > this.sqrMaxVelocity)
                     {
@@ -171,6 +205,9 @@ public class EnemieController : MonoBehaviour
                 {
                     this.isEnemieMoving = false;
                     this.rigidBodyComponent.velocity = Vector3.zero;
+
+                    this.GetComponent<AudioSource>().loop = false;
+                    this.GetComponent<AudioSource>().Stop();
                 }
             }
         }
@@ -192,6 +229,16 @@ public class EnemieController : MonoBehaviour
     {
         if (!isEnemieAttacking)
         {
+            this.GetComponent<AudioSource>().loop = false;
+            this.GetComponent<AudioSource>().Stop();
+
+            if (this.AttackSoundEffect != null)
+            {
+                this.GetComponent<AudioSource>().clip = this.AttackSoundEffect;
+                this.GetComponent<AudioSource>().loop = false;
+                this.GetComponent<AudioSource>().Play();
+            }
+
             this.isEnemieMoving = false;
             this.isEnemieAttacking = true;
             this.animatorComponent.SetTrigger("Attack");

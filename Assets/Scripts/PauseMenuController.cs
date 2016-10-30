@@ -14,6 +14,8 @@ public class PauseMenuController : MonoBehaviour {
     void Start()
     {
         this.preferences = GameObject.Find("PreferencesController").GetComponent<PreferencesController>();
+        this.GetComponent<AudioSource>().volume = this.preferences.EffectsVolume;
+
         this.SliderMusicVolume.onValueChanged.AddListener(delegate { PauseMenuMusicVolumeChanged(); });
         this.SliderEffectsVolume.onValueChanged.AddListener(delegate { PauseMenuEffectsVolumeChanged(); });
     }
@@ -51,6 +53,7 @@ public class PauseMenuController : MonoBehaviour {
     public void PauseMenuMusicVolumeChanged()
     {
         this.preferences.MusicVolume = this.SliderMusicVolume.value;
+        Camera.main.GetComponent<AudioSource>().volume = this.SliderMusicVolume.value;
     }
 
     /// <summary>
@@ -59,6 +62,11 @@ public class PauseMenuController : MonoBehaviour {
     public void PauseMenuEffectsVolumeChanged()
     {
         this.preferences.EffectsVolume = this.SliderEffectsVolume.value;
+        AudioSource[] audioSources = GameObject.Find("Root").GetComponentsInChildren<AudioSource>();
+
+        foreach (AudioSource audioSource in audioSources)
+            if (audioSource.gameObject.tag != "MainCamera")
+                audioSource.volume = this.SliderEffectsVolume.value;
     }
 
     /// <summary>
